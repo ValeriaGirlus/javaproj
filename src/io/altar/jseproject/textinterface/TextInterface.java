@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TextInterface {
 
 	public static void menu_principal() {
-		System.out.println("Por favor seleccione uma das seguintes opcoes:");
+		System.out.println("Por favor seleccione uma das seguintes opções:");
 		System.out.println("1)Listar produtos");
 		System.out.println("2)Listar prateleiras");
 		System.out.println("3)Sair");
@@ -18,18 +18,30 @@ public class TextInterface {
 		case 2:
 			TextInterface.menu_prateleira();
 			break;
-				
+			
 		}
 		
 	}
 
 	public static void menu_product() {
-		System.out.println("Por favor seleccione uma das seguintes opcoes:");
+		System.out.println("Por favor seleccione uma das seguintes opções:");
 		System.out.println("1)Criar novo produto");
 		System.out.println("2)Editar um produto existente");
 		System.out.println("3)Consultar o detalhe do produto");
 		System.out.println("4)Remover um produto");
-		System.out.println("5)Voltar ao ecra anterior");
+		System.out.println("5)Voltar ao ecrã anterior");
+		
+		int input = getInput(1,5);
+		switch(input){
+		case 1:
+			
+			break;
+		case 2: 
+			break;
+		case 3:
+			break;
+		}
+		
 	}
 
 	public static void menu_prateleira() {
@@ -38,7 +50,7 @@ public class TextInterface {
 		System.out.println("2)Editar uma prateleira existente");
 		System.out.println("3)Consultar o detalhe da prateleira");
 		System.out.println("4)Remover uma prateleira");
-		System.out.println("5)Voltar ao ecra anterior");
+		System.out.println("5)Voltar ao ecrã anterior");
 	}
 	
 	public static int getInput(int min, int max) {
@@ -51,10 +63,10 @@ public class TextInterface {
 				if (input >= min && input <= max) {
 					return input;
 				} else {
-					System.out.println("Por favor introduza um numero entre " + min + " e " + max);
+					System.out.println("Por favor introduza um número entre " + min + " e " + max);
 				}
 			} else {
-				System.out.println("Por favor introduza um nÃºmero");
+				System.out.println("Por favor introduza um número");
 				s.next();
 			}
 		}

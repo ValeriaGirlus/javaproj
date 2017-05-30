@@ -1,16 +1,15 @@
 package io.altar.jseproject.model;
 
 public class Product {
-	private int productid;
-	private float value;
-	private float IVA;
-	private float PVP;
-	
-	public int getProductId() {
-		return productId;
+	private int id;
+	private int value;
+	private int IVA;
+	private int PVP;
+	public int getId() {
+		return id;
 	}
-	public void setProductId(int id) {
-		this.productId = productId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public int getValue() {
 		return value;
@@ -30,5 +29,7 @@ public class Product {
 	public void setPVP(int pVP) {
 		PVP = pVP;
 	}
+
+
 	
 }
