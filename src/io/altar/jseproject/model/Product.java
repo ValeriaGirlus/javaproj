@@ -5,6 +5,7 @@ public class Product {
 	private int value;
 	private int IVA;
 	private int PVP;
+	
 	public int getId() {
 		return id;
 	}
@@ -30,6 +31,4 @@ public class Product {
 		PVP = pVP;
 	}
 
-
-	
 }

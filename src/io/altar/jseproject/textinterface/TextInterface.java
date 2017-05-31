@@ -2,10 +2,12 @@ package io.altar.jseproject.textinterface;
 
 import java.util.Scanner;
 
+import io.altar.jseproject.model.Product;
+
 public class TextInterface {
 
 	public static void menu_principal() {
-		System.out.println("Por favor seleccione uma das seguintes opï¿½ï¿½es:");
+		System.out.println("Por favor seleccione uma das seguintes opçoes:");
 		System.out.println("1)Listar produtos");
 		System.out.println("2)Listar prateleiras");
 		System.out.println("3)Sair");
@@ -106,37 +108,52 @@ public class TextInterface {
 	}
 	
 	public static void createProduct(){
-		Product 
-		System.out.println("");
+		Product P; 
+		P = new Product();
+	
+		System.out.println("1)Inserir Id do produto");
+		System.out.println("2)Inserir valor do produto");
+		System.out.println("3)Inserir IVA dp produto");
+		System.out.println("4)Inserir PVP do produto");
 		
+	
+		int input = getInput(1,4);
+		switch(input){
+		case 1: 
+			int id = getInput();
+			P.setId(id);
+			break;
+		case 2:
+			
+		}
 	}
 	
 	public static void editProduct(){
-		System.out.println("2)Editar um produto existente");
+		
 	}
 	
 	public static void consultProduct(){
-		System.out.println("3)Consultar o detalhe do produto");
+		
 	}
 	
 	public static void removeProduct(){
-		System.out.println("4)Remover um produto");
+		
 	}
 	
 	public static void createShelf(){
-		System.out.println("1)Criar nova prateleira");
+		
 	}
 	
 	public static void editShelf(){
-		System.out.println("2)Editar uma prateleira existente");
+		
 	}
 	
 	public static void consultShelf(){
-		System.out.println("3)Consultar o detalhe da prateleira");
+		
 	}
 	
 	public static void removeShelf(){
-		System.out.println("4)Remover uma prateleira");
+		
 	}
 	
 }
