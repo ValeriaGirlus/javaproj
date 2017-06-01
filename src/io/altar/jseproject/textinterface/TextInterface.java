@@ -80,6 +80,26 @@ public class TextInterface {
 		}
 	}
 	
+	public static void createProduct(){
+		Scanner s = new Scanner(System.in);
+		// o utilizador tem que escrever os 4 campos e qdo fizer enter isso adiciona os campos ao produto
+		System.out.println("Inserir Id do produto:");
+		Integer id = validateInt(s,false);
+		System.out.println("Inserir valor de desconto do produto:");
+		Float discount = validatefloat(s,false);
+		System.out.println("Inserir IVA do produto:");
+		Float IVA = validatefloat(s, false);
+		System.out.println("Inserir PVP do produto:");
+		Float PVP = validatefloat(s, false);
+		
+	// inserir os campos preenchidos dentro do produto			
+		Product P = new Product(id,discount,IVA,PVP);
+	//	Array_products = new Array [];
+		
+		
+	}
+	
+	//menu principal - o utilizador tem que inserir uma opcao 
 	public static int getInput(int min, int max) {
 		Scanner s = new Scanner(System.in);
 		int input = 0;
@@ -99,7 +119,8 @@ public class TextInterface {
 			}
 		}
 	}
-	
+	//criar produto
+	// id do produto - o utilizador pode inserir string, numero ou nada para validar   
 	public static Integer validateInt(Scanner s, boolean emptyAllowed){
 		String string ="";
 		Integer value = null;
@@ -125,31 +146,35 @@ public class TextInterface {
 		}
 	}
 	
-	public static Float validatefloat(Scanner s, boolean emptyAllowed){
-		
+	//desconto, IVA, PVP do produto como sao float - validar o que o utilizador escreve  
+	public static float validatefloat(Scanner s, boolean emptyAllowed){
+		String string ="";
+		Integer value = null;
+		while(true){
+			string = s.nextLine();
+			if(string.isEmpty()){
+				if(emptyAllowed){
+					return (Float) null;
+				}
+				else{
+					System.out.println("Tente outra vez");
+				}				
+			}
+			else{
+				try{
+					value = Integer.parseInt(string);
+					return value;
+				}
+				catch(Exception e){
+					System.out.println("Tente outra vez");
+				}
+			}
+		}
 	}
 	
-	public static void createProduct(){
-		Scanner s = new Scanner(System.in);
-		// o utilizador tem que escrever os 4 campos e qdo fizer enter isso adiciona os campos ao produto
-		System.out.println("Inserir Id do produto:");
-		Integer myID = validateInt(s,false);
-		System.out.println("Inserir valor de desconto do produto:");
-		Float myDiscount
-		System.out.println("Inserir IVA do produto:");
-		
-		System.out.println("Inserir PVP do produto:");
-	
-		
-				
-		Product P = new Product(myID,discount,IVA,PVP);
-		Array_products = new Array [];
-		
-		System.out.println("Product");
-	}
-	
-	public static void editProduct(){
+		public static void editProduct(){
 		// o utilizador primeiro introduz o id do produto e depois aparecem os campos associados a esse produto
+	
 	}
 	
 	public static void consultProduct(){

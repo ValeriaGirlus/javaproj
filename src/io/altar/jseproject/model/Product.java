@@ -41,5 +41,9 @@ public class Product {
 	@Override
 	public String toString(){
 		return "Id"+ id + "Discount" + discount + "IVA" + IVA  + "PVP" + PVP;
+		
+	//	System.out.println("P");
+	
 	}
+	
 }
