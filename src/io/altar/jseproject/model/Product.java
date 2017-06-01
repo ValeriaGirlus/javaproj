@@ -15,34 +15,40 @@ public class Product {
 	public float getDiscount() {
 		return discount;
 	}
-	public void setDiscount(int discount) {
+	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
 	public float getIVA() {
 		return IVA;
 	}
-	public void setIVA(int IVA) {
+	public void setIVA(float IVA) {
 		this.IVA = IVA;
 	}
 	public float getPVP() {
 		return PVP;
 	}
-	public void setPVP(int PVP) {
+	public void setPVP(float PVP) {
 		this.PVP = PVP;
 	}
 
-	public Product(int id, int discount, int IVA, int PVP) {
+	//o construtor 
+	public Product(int id, float discount, float IVA, float PVP) {
 		this.id = id;
 		this.discount = discount;
 		this.IVA = IVA;
 		this.PVP = PVP;
 	}
 	
+	//como o construtor diz que esta undefined, na net diz para fazer um construtor default, sem parametros
+	public Product(){
+		
+	}
+	
 	@Override
 	public String toString(){
 		return "Id"+ id + "Discount" + discount + "IVA" + IVA  + "PVP" + PVP;
 		
-	//	System.out.println("P");
+		System.out.println("Product");
 	
 	}
 	

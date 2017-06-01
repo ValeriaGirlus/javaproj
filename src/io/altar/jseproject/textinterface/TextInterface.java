@@ -80,26 +80,8 @@ public class TextInterface {
 		}
 	}
 	
-	public static void createProduct(){
-		Scanner s = new Scanner(System.in);
-		// o utilizador tem que escrever os 4 campos e qdo fizer enter isso adiciona os campos ao produto
-		System.out.println("Inserir Id do produto:");
-		Integer id = validateInt(s,false);
-		System.out.println("Inserir valor de desconto do produto:");
-		Float discount = validatefloat(s,false);
-		System.out.println("Inserir IVA do produto:");
-		Float IVA = validatefloat(s, false);
-		System.out.println("Inserir PVP do produto:");
-		Float PVP = validatefloat(s, false);
-		
-	// inserir os campos preenchidos dentro do produto			
-		Product P = new Product(id,discount,IVA,PVP);
-	//	Array_products = new Array [];
-		
-		
-	}
-	
-	//menu principal - o utilizador tem que inserir uma opcao 
+
+	//MENU PRINCIPAL - o utilizador tem que inserir uma opcao 
 	public static int getInput(int min, int max) {
 		Scanner s = new Scanner(System.in);
 		int input = 0;
@@ -119,8 +101,31 @@ public class TextInterface {
 			}
 		}
 	}
-	//criar produto
-	// id do produto - o utilizador pode inserir string, numero ou nada para validar   
+	
+	//CRIAR PRODUTO
+	public static void createProduct(){
+		Scanner s = new Scanner(System.in);
+		// o utilizador tem que escrever os 4 campos e qdo fizer enter isso adiciona os campos ao produto
+		System.out.println("Inserir Id do produto:");
+		Integer id = validateInt(s,false);
+		System.out.println("Inserir valor de desconto do produto:");
+		Float discount = validatefloat(s,false);
+		System.out.println("Inserir IVA do produto:");
+		Float IVA = validatefloat(s, false);
+		System.out.println("Inserir PVP do produto:");
+		Float PVP = validatefloat(s, false);
+		
+		// inserir os campos preenchidos dentro do produto
+		//não é suposto aparecer isto depois de o utilizador preencher?
+		Product P = new Product(id,discount,IVA,PVP);
+	
+		// inserir o produto no array	
+		Array_products = new Array [];
+		
+		
+	}
+	
+	// criar produto - id do produto - o utilizador pode inserir string, numero ou nada para validar   
 	public static Integer validateInt(Scanner s, boolean emptyAllowed){
 		String string ="";
 		Integer value = null;
@@ -139,6 +144,7 @@ public class TextInterface {
 					value = Integer.parseInt(string);
 					return value;
 				}
+				
 				catch(Exception e){
 					System.out.println("Tente outra vez");
 				}
@@ -146,7 +152,7 @@ public class TextInterface {
 		}
 	}
 	
-	//desconto, IVA, PVP do produto como sao float - validar o que o utilizador escreve  
+	//criar produto - desconto, IVA, PVP do produto como sao float - validar o que o utilizador escreve  
 	public static float validatefloat(Scanner s, boolean emptyAllowed){
 		String string ="";
 		Integer value = null;
@@ -172,19 +178,49 @@ public class TextInterface {
 		}
 	}
 	
-		public static void editProduct(){
-		// o utilizador primeiro introduz o id do produto e depois aparecem os campos associados a esse produto
-	
+	// EDITAR PRODUTO 
+	public static void editProduct(){
+		Scanner s = new Scanner(System.in);
+		System.out.println("Inserir Id do produto:");
+		Integer id = validateInt(s,false);
+		
+	// depois de inserir o id o produto, ir buscar os restantes campos associados a esse produto com esse id
+		
+	/*	id = P.getId();
+		discount = P.getDiscount();
+		IVA = P.getIVA();
+		PVP = P.getPVP();
+		
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
+	
+	
+	
+	
+	
+	// o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
 	public static void consultProduct(){
 		
 	}
 	
+	// o utilizador primeiro introduz o id do produto que quer remover e depois 
 	public static void removeProduct(){
 		
 	}
 	
+	
+	
+	
+	// prateleiras
 	public static void createShelf(){
 		
 	}
