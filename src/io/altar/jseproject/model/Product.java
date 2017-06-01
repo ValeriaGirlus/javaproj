@@ -2,9 +2,9 @@ package io.altar.jseproject.model;
 
 public class Product {
 	private int id;
-	private int value;
-	private int IVA;
-	private int PVP;
+	private float discount;
+	private float IVA;
+	private float PVP;
 	
 	public int getId() {
 		return id;
@@ -12,23 +12,34 @@ public class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getValue() {
-		return value;
+	public float getDiscount() {
+		return discount;
 	}
-	public void setValue(int value) {
-		this.value = value;
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
-	public int getIVA() {
+	public float getIVA() {
 		return IVA;
 	}
-	public void setIVA(int iVA) {
-		IVA = iVA;
+	public void setIVA(int IVA) {
+		this.IVA = IVA;
 	}
-	public int getPVP() {
+	public float getPVP() {
 		return PVP;
 	}
-	public void setPVP(int pVP) {
-		PVP = pVP;
+	public void setPVP(int PVP) {
+		this.PVP = PVP;
 	}
 
+	public Product(int id, int discount, int IVA, int PVP) {
+		this.id = id;
+		this.discount = discount;
+		this.IVA = IVA;
+		this.PVP = PVP;
+	}
+	
+	@Override
+	public String toString(){
+		return "Id"+ id + "Discount" + discount + "IVA" + IVA  + "PVP" + PVP;
+	}
 }

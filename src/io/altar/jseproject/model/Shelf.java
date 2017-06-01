@@ -4,7 +4,7 @@ public class Shelf {
 	private int shelfId;
 	private int code;
 	private int capacity;
-	private int price;
+	private float price;
 	
 	public int getShelfId() {
 		return shelfId;
@@ -24,12 +24,18 @@ public class Shelf {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
 		this.price = price;
 	}
 	
-	
+	public Shelf(int shelfId, int code, int capacity, int price) {
+		super();
+		this.shelfId = shelfId;
+		this.code = code;
+		this.capacity = capacity;
+		this.price = price;
+	}
 }

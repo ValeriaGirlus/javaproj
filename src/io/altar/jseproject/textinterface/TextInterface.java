@@ -1,5 +1,6 @@
 package io.altar.jseproject.textinterface;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import io.altar.jseproject.model.Product;
@@ -7,7 +8,7 @@ import io.altar.jseproject.model.Product;
 public class TextInterface {
 
 	public static void menu_principal() {
-		System.out.println("Por favor seleccione uma das seguintes opçoes:");
+		System.out.println("Por favor seleccione uma das seguintes opï¿½oes:");
 		System.out.println("1)Listar produtos");
 		System.out.println("2)Listar prateleiras");
 		System.out.println("3)Sair");
@@ -20,10 +21,7 @@ public class TextInterface {
 		case 2:
 			TextInterface.menu_shelf();
 			break;
-			
-			
 		}
-		
 	}
 
 	public static void menu_product() {
@@ -51,9 +49,7 @@ public class TextInterface {
 		case 5:
 			TextInterface.menu_principal();
 			break;
-
 		}
-		
 	}
 
 	public static void menu_shelf() {
@@ -100,36 +96,60 @@ public class TextInterface {
 				System.out.println("Por favor introduza um numero");
 				s.next();
 				s.close();
-
 			}
-	
 		}
+	}
+	
+	public static Integer validateInt(Scanner s, boolean emptyAllowed){
+		String string ="";
+		Integer value = null;
+		while(true){
+			string = s.nextLine();
+			if(string.isEmpty()){
+				if(emptyAllowed){
+					return null;
+				}
+				else{
+					System.out.println("Tente outra vez");
+				}				
+			}
+			else{
+				try{
+					value = Integer.parseInt(string);
+					return value;
+				}
+				catch(Exception e){
+					System.out.println("Tente outra vez");
+				}
+			}
+		}
+	}
+	
+	public static Float validatefloat(Scanner s, boolean emptyAllowed){
 		
 	}
 	
 	public static void createProduct(){
-		Product P; 
-		P = new Product();
-	
-		System.out.println("1)Inserir Id do produto");
-		System.out.println("2)Inserir valor do produto");
-		System.out.println("3)Inserir IVA dp produto");
-		System.out.println("4)Inserir PVP do produto");
+		Scanner s = new Scanner(System.in);
+		// o utilizador tem que escrever os 4 campos e qdo fizer enter isso adiciona os campos ao produto
+		System.out.println("Inserir Id do produto:");
+		Integer myID = validateInt(s,false);
+		System.out.println("Inserir valor de desconto do produto:");
+		Float myDiscount
+		System.out.println("Inserir IVA do produto:");
 		
+		System.out.println("Inserir PVP do produto:");
 	
-		int input = getInput(1,4);
-		switch(input){
-		case 1: 
-			int id = getInput();
-			P.setId(id);
-			break;
-		case 2:
-			
-		}
+		
+				
+		Product P = new Product(myID,discount,IVA,PVP);
+		Array_products = new Array [];
+		
+		System.out.println("Product");
 	}
 	
 	public static void editProduct(){
-		
+		// o utilizador primeiro introduz o id do produto e depois aparecem os campos associados a esse produto
 	}
 	
 	public static void consultProduct(){
