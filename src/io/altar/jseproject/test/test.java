@@ -1,6 +1,5 @@
 package io.altar.jseproject.test;
 
-import io.altar.jseproject.model.Product;
 import io.altar.jseproject.textinterface.TextInterface;
 
 public class test {
@@ -9,7 +8,6 @@ public class test {
 		TextInterface.menu_principal();
 		
 		
-	}		
 		
-
+	}			
 }
