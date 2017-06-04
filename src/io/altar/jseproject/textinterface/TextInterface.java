@@ -1,10 +1,10 @@
 package io.altar.jseproject.textinterface;
 
 import java.util.Arrays;
-import java.util.Scanner;
-
-import io.altar.jseproject.model.Product;
 import java.util.ArrayList;
+import java.util.Scanner;
+import io.altar.jseproject.model.Product;
+
 
 public class TextInterface {
 	//as opcoes que aparecem a utilizador no primeiro ecra
@@ -27,10 +27,6 @@ public class TextInterface {
 	
 	//o utilizador ao clicar 1 no menu principal aparece um segundo ecra com o menu para os produtos
 	public static void menu_product() {
-		//criar array dos produtos o que esta mal com isto????
-		//https://stackoverflow.com/questions/1200621/how-do-i-declare-and-initialize-an-array-in-java
-		public ArrayList<Product> productList = new ArrayList<Product>();
-		
 		// aparecer a lista dos produtos antes de aparecerem as opcoes
 		System.out.println("Lista de produtos: ");
 		
@@ -124,21 +120,22 @@ public class TextInterface {
 		Float IVA = validatefloat(s, false);
 		System.out.println("Inserir PVP do produto:");
 		Float PVP = validatefloat(s, false);
-		
 		// os campos que foram preenchidos vao ser inseridos nos parametros do produto
-		Product P = new Product(id,discount,IVA,PVP);
-		System.out.println("Product: " + "ID: " + id + "Discount: " + discount + "IVA: " + IVA + "PVP: " + PVP);
+		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + IVA + " PVP:" + PVP);	
+		//construir um array que contenha todos os produtos que forem criados
 		
+		Product P = new Product(id,discount,IVA,PVP);
+		ArrayList<Product> Products = new ArrayList<Product>();
+		Products.add(P);
+		
+		/*	
+		
+		*/
+		
+		
+						
 		// depois de mostrar os produtos com os parametros voltar para o menu principal
 		menu_principal();
-		
-		// inserir o produto na lista de produtos no menu dos produtos 	!!!!!!!!!
-		
-		productList.add(new Product(id, discount, IVA, PVP));
-		
-		 // LinkHashMap pesquisar
-		
-		
 		
 	}
 	
@@ -163,7 +160,6 @@ public class TextInterface {
 				}
 				catch(Exception e){
 					System.out.println("Tente outra vez");
-			
 				}
 			}
 		}
@@ -190,7 +186,6 @@ public class TextInterface {
 				}
 				catch(Exception e){
 					System.out.println("Tente outra vez");
-					
 				}
 			}
 		}
@@ -203,7 +198,7 @@ public class TextInterface {
 		Integer id = validateInt(s,false);
 		
 		//tenho que dizer ao utilizador que para o produto com este id, apresenta o desconto x (buscar o desconto com o get), IVA y e PVP z
-		System.out.println("O produto com o Id especificado apresenta os seguintes valores para: " + "Desconto: " + productList.getDiscount() + "IVA: " + productList.getIVA() + "PVP: " + productList.getPVP());
+		System.out.println("O produto com o Id especificado apresenta os seguintes valores para: " + " Desconto:" + Products.getDiscount() + " IVA:" + Products.getIVA() + " PVP:" + Products.getPVP());
 		// a seguir tenho que dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar e validar estes valores, se nao inserir nada assumir os valores anteriores
 		System.out.println("Insira o novo valor de desconto: ");
 		Float discount = validatefloat(s,false);
@@ -214,7 +209,7 @@ public class TextInterface {
 	
 		//aparecer o produto com os novos parametros
 		Product P = new Product(id,discount,IVA,PVP);
-		System.out.println("Product: " + "ID: " + id + "Discount: " + discount + "IVA: " + IVA + "PVP: " + PVP);
+		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + IVA + " PVP:" + PVP);
 		
 		menu_principal();		
 	}
