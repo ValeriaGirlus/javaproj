@@ -3,6 +3,9 @@ package io.altar.jseproject.textinterface;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import io.altar.jseproject.Repository.ProductRepository;
+import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.model.Product;
 
 
@@ -122,17 +125,10 @@ public class TextInterface {
 		Float PVP = validatefloat(s, false);
 		// os campos que foram preenchidos vao ser inseridos nos parametros do produto
 		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + IVA + " PVP:" + PVP);	
-		//construir um array que contenha todos os produtos que forem criados
-		
 		Product P = new Product(id,discount,IVA,PVP);
-		ArrayList<Product> Products = new ArrayList<Product>();
-		Products.add(P);
 		
-		/*	
-		
-		*/
-		
-		
+		//adicionar os produtos a lista de produtos ???porque esta a dar erro
+		ProductRepository.getInstance().addToList(p);
 						
 		// depois de mostrar os produtos com os parametros voltar para o menu principal
 		menu_principal();
@@ -186,6 +182,7 @@ public class TextInterface {
 				}
 				catch(Exception e){
 					System.out.println("Tente outra vez");
+					//nao tem em conta se o utilizador escrever numero negativo
 				}
 			}
 		}
@@ -198,7 +195,7 @@ public class TextInterface {
 		Integer id = validateInt(s,false);
 		
 		//tenho que dizer ao utilizador que para o produto com este id, apresenta o desconto x (buscar o desconto com o get), IVA y e PVP z
-		System.out.println("O produto com o Id especificado apresenta os seguintes valores para: " + " Desconto:" + Products.getDiscount() + " IVA:" + Products.getIVA() + " PVP:" + Products.getPVP());
+		System.out.println("O produto com o Id especificado apresenta os seguintes valores para: " + " Desconto:" + productList.getId(id).getDiscount() + " IVA:" + productList.getIVA() + " PVP:" + productList.getPVP());
 		// a seguir tenho que dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar e validar estes valores, se nao inserir nada assumir os valores anteriores
 		System.out.println("Insira o novo valor de desconto: ");
 		Float discount = validatefloat(s,false);
@@ -207,6 +204,9 @@ public class TextInterface {
 		System.out.println("Insira o novo valor de PVP: ");
 		Float PVP = validatefloat(s,false);
 	
+		
+		//falta dizer que se o utlizador nao inserir nada assumir os valores anteriores e validar no caso de ele escrever
+		
 		//aparecer o produto com os novos parametros
 		Product P = new Product(id,discount,IVA,PVP);
 		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + IVA + " PVP:" + PVP);
@@ -214,20 +214,30 @@ public class TextInterface {
 		menu_principal();		
 	}
 	
-	
-	
-	
-	
-	
-	// o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
+		// o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
 	public static void consultProduct(){
-		
+		Scanner s = new Scanner(System.in);
+		System.out.println("Inserir Id do produto que quer consultar:");
+		Integer id = validateInt(s,false);
+		//falta completar
+		menu_principal();	
 	}
 	
-	// o utilizador primeiro introduz o id do produto que quer remover e depois 
+	// o utilizador primeiro introduz o id do produto que quer remover 
 	public static void removeProduct(){
-		
+		Scanner s = new Scanner(System.in);
+		System.out.println("Inserir Id do produto que quer eliminar:");
+		Integer id = validateInt(s,false);
+		//falta completar
+		menu_principal();	
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

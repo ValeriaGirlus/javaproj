@@ -1,6 +1,6 @@
 package io.altar.jseproject.model;
 
-public class Product {
+public class Product extends Entity {
 	private Integer id;
 	private float discount;
 	private float IVA;
@@ -40,9 +40,10 @@ public class Product {
 		
 	}
 	
-	//como o construtor diz que esta undefined, na net diz para fazer um construtor default, sem parametros
+	/*como o construtor diz que esta undefined, na net diz para fazer um construtor default, sem parametros
 	public Product(){
 	}
+	*/
 	
 	@Override
 	public String toString(){
