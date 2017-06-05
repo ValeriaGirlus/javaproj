@@ -120,15 +120,15 @@ public class TextInterface {
 		System.out.println("Inserir valor de desconto do produto:");
 		Float discount = validatefloat(s,false);
 		System.out.println("Inserir IVA do produto:");
-		Float IVA = validatefloat(s, false);
+		Float tax = validatefloat(s, false);
 		System.out.println("Inserir PVP do produto:");
-		Float PVP = validatefloat(s, false);
+		Float saleprice = validatefloat(s, false);
 		// os campos que foram preenchidos vao ser inseridos nos parametros do produto
-		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + IVA + " PVP:" + PVP);	
-		Product P = new Product(id,discount,IVA,PVP);
+		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice);	
+		Product P = new Product(id, discount, tax, saleprice);
 		
-		//adicionar os produtos a lista de produtos ???porque esta a dar erro
-		ProductRepository.getInstance().addToList(p);
+		//adicionar os produtos criados a lista de produtos 
+		ProductRepository.getInstance().addToList(P);
 						
 		// depois de mostrar os produtos com os parametros voltar para o menu principal
 		menu_principal();
@@ -188,29 +188,32 @@ public class TextInterface {
 		}
 	}
 	
-	// EDITAR PRODUTO - o primeiro passo e o utilizador inserir o id o produto, e a seguir sao mostrados os restantes campos associados a esse produto com esse id
+	 
+	//EDITAR PRODUTO - o primeiro passo e o utilizador inserir o id o produto 
+	//a seguir mostrar os restantes campos associados a esse produto com esse id 
+	
+	
 	public static void editProduct(){
 		Scanner s = new Scanner(System.in);
 		System.out.println("Inserir Id do produto que quer editar:");
 		Integer id = validateInt(s,false);
 		
-		//tenho que dizer ao utilizador que para o produto com este id, apresenta o desconto x (buscar o desconto com o get), IVA y e PVP z
-		System.out.println("O produto com o Id especificado apresenta os seguintes valores para: " + " Desconto:" + productList.getId(id).getDiscount() + " IVA:" + productList.getIVA() + " PVP:" + productList.getPVP());
-		// a seguir tenho que dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar e validar estes valores, se nao inserir nada assumir os valores anteriores
+		
+		// dizer ao utilizador para o produto com este id, apresenta o desconto x, tax y e saleprice z
+		System.out.println("O produto com o Id especificado apresenta os seguintes valores para: " + " Desconto:" + 
+							productList. + " IVA:" + productList.getTax() + " PVP:" + productList.getPVP());
+		/* 
+		 a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
+		 e validar estes valores, se nao inserir nada assumir os valores anteriores
+		 */
 		System.out.println("Insira o novo valor de desconto: ");
-		Float discount = validatefloat(s,false);
+		Float newDiscount = validatefloat(s,false);
 		System.out.println("Insira o novo valor de IVA: ");
-		Float IVA = validatefloat(s,false);
+		Float newTax = validatefloat(s,false);
 		System.out.println("Insira o novo valor de PVP: ");
-		Float PVP = validatefloat(s,false);
-	
-		
-		//falta dizer que se o utlizador nao inserir nada assumir os valores anteriores e validar no caso de ele escrever
-		
-		//aparecer o produto com os novos parametros
-		Product P = new Product(id,discount,IVA,PVP);
-		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + IVA + " PVP:" + PVP);
-		
+		Float newSalePrice = validatefloat(s,false);
+
+				
 		menu_principal();		
 	}
 	

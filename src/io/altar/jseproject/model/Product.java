@@ -3,8 +3,8 @@ package io.altar.jseproject.model;
 public class Product extends Entity {
 	private Integer id;
 	private float discount;
-	private float IVA;
-	private float PVP;
+	private float tax;
+	private float saleprice;
 	
 	public Integer getId() {
 		return id;
@@ -18,25 +18,25 @@ public class Product extends Entity {
 	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
-	public float getIVA() {
-		return IVA;
+	public float getTax() {
+		return tax;
 	}
-	public void setIVA(float IVA) {
-		this.IVA = IVA;
+	public void setTax(float tax) {
+		this.tax = tax;
 	}
-	public float getPVP() {
-		return PVP;
+	public float getSalePrice() {
+		return saleprice;
 	}
-	public void setPVP(float PVP) {
-		this.PVP = PVP;
+	public void setSalePrice(float saleprice) {
+		this.saleprice = saleprice;
 	}
 
 	//o construtor 
-	public Product(Integer id, float discount, float IVA, float PVP) {
+	public Product(Integer id, float discount, float tax, float saleprice) {
 		this.id = id;
 		this.discount = discount;
-		this.IVA = IVA;
-		this.PVP = PVP;
+		this.tax = tax;
+		this.saleprice = saleprice;
 		
 	}
 	
@@ -47,6 +47,6 @@ public class Product extends Entity {
 	
 	@Override
 	public String toString(){
-		return "Id: "+ id + ", Discount: " + discount + ", IVA: " + IVA  + ", PVP: " + PVP;
+		return "Id: "+ id + ", Discount: " + discount + ", IVA: " + tax  + ", PVP: " + saleprice;
 	}
 }
