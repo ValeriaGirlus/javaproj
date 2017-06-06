@@ -14,7 +14,8 @@ public class ProductRepository extends EntityRepository<Product>{
 		return INSTANCE;
 	}
 	
-	//editar os parametros dum produto diz-me que o campo nao est√° visivel porque??????
+	//editar os parametros dum produto para o id especificado
+	//o que est· mal?
 	public void editItem(Integer id, float discount, float tax, float saleprice){
 		entityList.get(id).setId(id);
 		entityList.get(id).setDiscount(discount);
@@ -22,9 +23,10 @@ public class ProductRepository extends EntityRepository<Product>{
 		entityList.get(id).setSalePrice(saleprice);
 	}
 	
-	//criar o metodo showProduct() para mostrar os parametros do produto quando se introduz o id ??????
+	//criar o metodo showProduct() para mostrar os campos do produto quando se introduz o id 
+	//o que est· mal?
 	public static void showProduct(){
-		return entityList.get(id);
+		return entityList.getId(id);
 		return entityList.get(id).get(discount);
 		return entityList.get(id).get(tax);
 		return entityList.get(id).get(saleprice);

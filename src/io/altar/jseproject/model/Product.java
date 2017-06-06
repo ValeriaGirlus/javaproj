@@ -4,7 +4,7 @@ import io.altar.jseproject.Repository.ProductRepository;
  
 
 public class Product extends Entity {
-	private Integer id;
+	//private Integer id;
 	private float discount;
 	private float tax;
 	private float saleprice;
@@ -37,13 +37,14 @@ public class Product extends Entity {
 
 	//o construtor 
 	public Product(Integer id, float discount, float tax, float saleprice) {
-		this.id = id;
+		//this.id = id;
 		this.discount = discount;
 		this.tax = tax;
 		this.saleprice = saleprice;
 		ProductRepository.getInstance().addToList(this);
 	}
 	
+	//o id nao vai ser inserido pelo utilizador mas vem do método da Superclass 
 	@Override
 	public String toString(){
 		return "Id: "+ getId() + ", Discount: " + discount + ", IVA: " + tax  + ", PVP: " + saleprice;

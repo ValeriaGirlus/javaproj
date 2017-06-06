@@ -11,12 +11,14 @@ public abstract class EntityRepository<E extends Entity>{
 	// ArrayList<Product> Products = new ArrayList<Product>();
 	
 	private static LinkedHashMap<Integer, Entity> entityList = new LinkedHashMap<>();
+	//o linkhashmap mantém a ordem de inserção dos elementos na lista de produtos ou prateleira
+	//por cada produto ou prateleira criada, o id é incrementado por 1 em relação ao 0
 		private static Integer id = 0;
 		public static Integer getNextId(){
 			return ++id;
 		}
 		
-	//adicionar a lista de produtos os ids dos produtos, ou remover um produto
+	//neste caso, adicionar o id à lista entityList ou remover, refere-se tanto aos produtos como às prateleiras 
 		public void addToList(Entity e){
 			entityList.put(e.getId(),e);	
 		}
@@ -30,11 +32,12 @@ public abstract class EntityRepository<E extends Entity>{
 			return entityList.isEmpty();
 		}
 
-		//
+		//nao percebo muito bem isto
 		public Set<Integer> keySet(){
 			return entityList.keySet();
 		}
 		
+		//nao percebo muito bem isto
 		public Entity get(Integer id){
 			return entityList.get(id);
 		}

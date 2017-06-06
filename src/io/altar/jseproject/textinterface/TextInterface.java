@@ -1,7 +1,5 @@
 package io.altar.jseproject.textinterface;
 
-
-
 import java.util.Scanner;
 
 import io.altar.jseproject.Repository.ProductRepository;
@@ -14,9 +12,10 @@ public class TextInterface {
 	
 	public static ProductRepository ProductList = ProductRepository.getInstance();
 	
-	//as opcoes que aparecem a utilizador no primeiro ecra
+	//---------------------------------------menu principal--------------------------------------------------
+	//as opções que aparecem ao utilizador no primeiro ecrã que é o menu principal i.e o primeiro que aparece
 	public static void menu_principal() {
-		System.out.println("Por favor seleccione uma das seguintes opï¿½oes:");
+		System.out.println("Por favor seleccione uma das seguintes opções:");
 		System.out.println("1)Listar produtos");
 		System.out.println("2)Listar prateleiras");
 		System.out.println("3)Sair");
@@ -32,27 +31,29 @@ public class TextInterface {
 		}
 	}
 	
-	//o utilizador ao clicar 1 no menu principal aparece um segundo ecra com o menu para os produtos
+	//-------------------------------------menu produtos----------------------------------------------------
+	//o utilizador ao clicar 1 no menu principal aparece um segundo ecrã com o menu para os produtos
 	public static void menu_product() {
-		// aparecer a lista dos produtos que ha, antes de aparecerem as opcoes
+		// aparecer a lista dos produtos que há, antes de aparecerem as opções
 		System.out.println("Lista de produtos:");
 		String string = "";
 		
 		if(ProductList.isEmpty()){
-			System.out.println("A lista esta vazia");
+			System.out.println("A lista está vazia");
 			
+			//nao percebo muito bem isto
 			for(Integer id : ProductList.keySet()){
 				System.out.println(ProductList.get(id));
 			}
 			//nao me aparece a lista de produtos quando insiro mais produtos!!!!!
 		}				
 		
-		System.out.println("Por favor seleccione uma das seguintes opcoes:");
+		System.out.println("Por favor seleccione uma das seguintes opções:");
 		System.out.println("1)Criar novo produto");
 		System.out.println("2)Editar um produto existente");
 		System.out.println("3)Consultar o detalhe do produto");
 		System.out.println("4)Remover um produto");
-		System.out.println("5)Voltar ao ecra anterior");
+		System.out.println("5)Voltar ao ecrã anterior");
 		
 		int input = getInput(1,5);
 		switch(input){
@@ -74,15 +75,15 @@ public class TextInterface {
 		}
 	}
 
-	
-	//o utilizador ao clicar 2 no menu principal aparece um segundo ecra com o menu para as prateleiras
+	//-----------------------------------menu prateleiras--------------------------------------------------
+	//o utilizador ao clicar 2 no menu principal aparece um segundo ecrã com o menu para as prateleiras
 	public static void menu_shelf() {
-		System.out.println("Por favor seleccione uma das seguintes opcoes:");
+		System.out.println("Por favor seleccione uma das seguintes opções:");
 		System.out.println("1)Criar nova prateleira");
 		System.out.println("2)Editar uma prateleira existente");
 		System.out.println("3)Consultar o detalhe da prateleira");
 		System.out.println("4)Remover uma prateleira");
-		System.out.println("5)Voltar ao ecra anterior");
+		System.out.println("5)Voltar ao ecrã anterior");
 		
 		int input = getInput(1,5);
 		switch(input){
@@ -104,7 +105,8 @@ public class TextInterface {
 		}
 	}
 	
-	//MENU PRINCIPAL - o utilizador tem que inserir uma opcao das 3 disponiveis 
+	//-----------------------------------------------menu principal-----------------------------------------------------------
+	//no menu_principal o utilizador tem que inserir uma opção das 3 disponíveis (mínimo o valor 1 e máximo o valor 3) 
 	public static int getInput(int min, int max) {
 		Scanner s = new Scanner(System.in);
 		int input = 0;
@@ -125,11 +127,14 @@ public class TextInterface {
 		}
 	}
 	
+	//------------------------------------------------menu produtos-----------------------------------------------------------
 	//CRIAR PRODUTO
 	public static void createProduct(){
 		Scanner s = new Scanner(System.in);
-		// o utilizador tem que escrever os 4 campos e qdo fizer enter isso adiciona os campos ao produto
+			//o utilizador não precisa de escrever o id porque é gerado automaticamente
+		//o utilizador preenche os outros campos, sendo que é preciso validar o que escreve
 		System.out.println("Inserir Id do produto:");
+		//ver isto melhor!
 		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
 		Float discount = validatefloat(s,false);
@@ -137,17 +142,19 @@ public class TextInterface {
 		Float tax = validatefloat(s, false);
 		System.out.println("Inserir PVP do produto:");
 		Float saleprice = validatefloat(s, false);
-		// os campos que foram preenchidos vao ser inseridos nos parametros do produto
+		//os campos que foram preenchidos vão ser inseridos no produto e vai aparecer neste formato cada produto 
 		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice);	
 		
+		//perceber isto melhor!
 		new Product(id,discount,tax,saleprice);
 						
-		// depois de mostrar os produtos com os parametros voltar para o menu principal
+		//voltar para o menu principal
 		menu_principal();
 		
 	}
 	
-	// criar produto - id do produto - o utilizador pode inserir string, numero ou nada para validar   
+	//validar o que o utilizador insere nos campos para CRIAR PRODUTO - id do produto (pode inserir string, numero ou nada)
+	//encontrar uma maneira mais simples!
 	public static Integer validateInt(Scanner s, boolean emptyAllowed){
 		String string ="";
 		Integer value = null;
@@ -173,9 +180,8 @@ public class TextInterface {
 		}
 	}
 	
-	//criar produto - desconto, tax, saleprice do produto como sao float - validar o que o utilizador escreve
-	//nao tem em conta se o utilizador escrever numero negativo
-	//encontrar uma maneira mais facil de fazer isto !!!!!
+
+	//encontrar uma maneira mais simples!
 	public static float validatefloat(Scanner s, boolean emptyAllowed){
 		String string ="";
 		Integer value = null;
@@ -203,21 +209,24 @@ public class TextInterface {
 	}
 	
 	 
-	//EDITAR PRODUTO - o primeiro passo e o utilizador inserir o id o produto 
-		
+	//EDITAR PRODUTO - o primeiro passo e o utilizador escolher o id do produto que quer modificar
 	public static void editProduct(){
 		Scanner s = new Scanner(System.in);
-		System.out.println("Para o Id do produto que quer editar:");
+		System.out.println("Indique o Id do produto que quer editar:");
 		Integer id = validateInt(s,false);
 		
-		//a seguir mostrar os restantes campos associados a esse produto com esse id 
+		//a seguir mostrar os restantes campos associados a esse produto com esse id através do método showProduct()
 		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
 							ProductRepository.getInstance().showProduct(id));
 		
-		//a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
-		//se nao inserir nada assumir o valor anteriores
-	 
+		/*
+			a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
+			se nao inserir nada assumir o valor anteriores
+			aparecer o produto com os novos valores inseridos pelo utilizador 
+		*/
 		
+	 
+		//???
 		System.out.println("Insira o novo valor de desconto: ");
 		 
 		System.out.println("Insira o novo valor de IVA: ");
@@ -229,21 +238,27 @@ public class TextInterface {
 		menu_principal();		
 	}
 	
-		// o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
+	//CONSULTAR PRODUTO - o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
+	//o que falta?
 	public static void consultProduct(){
 		Scanner s = new Scanner(System.in);
+		
 		System.out.println("Inserir Id do produto que quer consultar:");
 		Integer id = validateInt(s,false);
-		//falta completar
+		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
+				ProductRepository.getInstance().showProduct(id));
+		
 		menu_principal();	
 	}
 	
-	// o utilizador primeiro introduz o id do produto que quer remover 
+	//REMOVER PRODUTO - o utilizador primeiro introduz o id do produto que quer remover 
+	//o que falta?
 	public static void removeProduct(){
 		Scanner s = new Scanner(System.in);
+		
 		System.out.println("Inserir Id do produto que quer eliminar:");
 		Integer id = validateInt(s,false);
-		//falta completar
+		
 		menu_principal();	
 	}
 	
@@ -256,8 +271,8 @@ public class TextInterface {
 	
 	
 	
-	//--------------------------------------------------------------------------------------------------------------------
-	// prateleiras falta fazer
+	//------------------------------------------------menu prateleiras--------------------------------------------------------------
+	//  falta fazer
 	public static void createShelf(){
 		
 	}
