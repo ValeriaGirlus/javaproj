@@ -1,17 +1,21 @@
 package io.altar.jseproject.model;
 
+import io.altar.jseproject.Repository.ProductRepository;
+ 
+
 public class Product extends Entity {
 	private Integer id;
 	private float discount;
 	private float tax;
 	private float saleprice;
-	
+	/*
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	*/
 	public float getDiscount() {
 		return discount;
 	}
@@ -37,16 +41,11 @@ public class Product extends Entity {
 		this.discount = discount;
 		this.tax = tax;
 		this.saleprice = saleprice;
-		
+		ProductRepository.getInstance().addToList(this);
 	}
-	
-	/*como o construtor diz que esta undefined, na net diz para fazer um construtor default, sem parametros
-	public Product(){
-	}
-	*/
 	
 	@Override
 	public String toString(){
-		return "Id: "+ id + ", Discount: " + discount + ", IVA: " + tax  + ", PVP: " + saleprice;
+		return "Id: "+ getId() + ", Discount: " + discount + ", IVA: " + tax  + ", PVP: " + saleprice;
 	}
 }

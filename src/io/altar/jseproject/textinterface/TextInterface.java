@@ -1,15 +1,19 @@
 package io.altar.jseproject.textinterface;
 
-import java.util.Arrays;
-import java.util.ArrayList;
+
+
 import java.util.Scanner;
 
 import io.altar.jseproject.Repository.ProductRepository;
 import io.altar.jseproject.Repository.EntityRepository;
+import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
 
 
 public class TextInterface {
+	
+	public static ProductRepository ProductList = ProductRepository.getInstance();
+	
 	//as opcoes que aparecem a utilizador no primeiro ecra
 	public static void menu_principal() {
 		System.out.println("Por favor seleccione uma das seguintes op�oes:");
@@ -30,8 +34,18 @@ public class TextInterface {
 	
 	//o utilizador ao clicar 1 no menu principal aparece um segundo ecra com o menu para os produtos
 	public static void menu_product() {
-		// aparecer a lista dos produtos antes de aparecerem as opcoes
-		System.out.println("Lista de produtos: ");
+		// aparecer a lista dos produtos que ha, antes de aparecerem as opcoes
+		System.out.println("Lista de produtos:");
+		String string = "";
+		
+		if(ProductList.isEmpty()){
+			System.out.println("A lista esta vazia");
+			
+			for(Integer id : ProductList.keySet()){
+				System.out.println(ProductList.get(id));
+			}
+			//nao me aparece a lista de produtos quando insiro mais produtos!!!!!
+		}				
 		
 		System.out.println("Por favor seleccione uma das seguintes opcoes:");
 		System.out.println("1)Criar novo produto");
@@ -116,7 +130,7 @@ public class TextInterface {
 		Scanner s = new Scanner(System.in);
 		// o utilizador tem que escrever os 4 campos e qdo fizer enter isso adiciona os campos ao produto
 		System.out.println("Inserir Id do produto:");
-		Integer id = validateInt(s,false);
+		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
 		Float discount = validatefloat(s,false);
 		System.out.println("Inserir IVA do produto:");
@@ -125,10 +139,8 @@ public class TextInterface {
 		Float saleprice = validatefloat(s, false);
 		// os campos que foram preenchidos vao ser inseridos nos parametros do produto
 		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice);	
-		Product P = new Product(id, discount, tax, saleprice);
 		
-		//adicionar os produtos criados a lista de produtos 
-		ProductRepository.getInstance().addToList(P);
+		new Product(id,discount,tax,saleprice);
 						
 		// depois de mostrar os produtos com os parametros voltar para o menu principal
 		menu_principal();
@@ -161,7 +173,9 @@ public class TextInterface {
 		}
 	}
 	
-	//criar produto - desconto, IVA, PVP do produto como sao float - validar o que o utilizador escreve  
+	//criar produto - desconto, tax, saleprice do produto como sao float - validar o que o utilizador escreve
+	//nao tem em conta se o utilizador escrever numero negativo
+	//encontrar uma maneira mais facil de fazer isto !!!!!
 	public static float validatefloat(Scanner s, boolean emptyAllowed){
 		String string ="";
 		Integer value = null;
@@ -182,7 +196,7 @@ public class TextInterface {
 				}
 				catch(Exception e){
 					System.out.println("Tente outra vez");
-					//nao tem em conta se o utilizador escrever numero negativo
+					
 				}
 			}
 		}
@@ -190,29 +204,27 @@ public class TextInterface {
 	
 	 
 	//EDITAR PRODUTO - o primeiro passo e o utilizador inserir o id o produto 
-	//a seguir mostrar os restantes campos associados a esse produto com esse id 
-	
-	
+		
 	public static void editProduct(){
 		Scanner s = new Scanner(System.in);
-		System.out.println("Inserir Id do produto que quer editar:");
+		System.out.println("Para o Id do produto que quer editar:");
 		Integer id = validateInt(s,false);
 		
+		//a seguir mostrar os restantes campos associados a esse produto com esse id 
+		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
+							ProductRepository.getInstance().showProduct(id));
 		
-		// dizer ao utilizador para o produto com este id, apresenta o desconto x, tax y e saleprice z
-		System.out.println("O produto com o Id especificado apresenta os seguintes valores para: " + " Desconto:" + 
-							productList. + " IVA:" + productList.getTax() + " PVP:" + productList.getPVP());
-		/* 
-		 a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
-		 e validar estes valores, se nao inserir nada assumir os valores anteriores
-		 */
+		//a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
+		//se nao inserir nada assumir o valor anteriores
+	 
+		
 		System.out.println("Insira o novo valor de desconto: ");
-		Float newDiscount = validatefloat(s,false);
+		 
 		System.out.println("Insira o novo valor de IVA: ");
-		Float newTax = validatefloat(s,false);
+	
 		System.out.println("Insira o novo valor de PVP: ");
-		Float newSalePrice = validatefloat(s,false);
 
+               
 				
 		menu_principal();		
 	}
@@ -244,8 +256,8 @@ public class TextInterface {
 	
 	
 	
-	
-	// prateleiras
+	//--------------------------------------------------------------------------------------------------------------------
+	// prateleiras falta fazer
 	public static void createShelf(){
 		
 	}
@@ -264,4 +276,4 @@ public class TextInterface {
 	
 }
 			
-				
+		//https://stackoverflow.com/questions/14243923/deleting-a-selected-item-using-linked-hash-map		

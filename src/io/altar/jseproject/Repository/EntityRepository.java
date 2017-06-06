@@ -1,38 +1,46 @@
 package io.altar.jseproject.Repository;
 
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 import io.altar.jseproject.model.Entity;
-import io.altar.jseproject.model.Product;
+
 
 public abstract class EntityRepository<E extends Entity>{
 
 	// ArrayList<Product> Products = new ArrayList<Product>();
 	
-	private static LinkedHashMap<Integer, Product> productList = new LinkedHashMap<Integer, Product>();
-		private Integer index = 0;
-		protected Integer getNextId(){
-			return ++index;
-		}
-	
-	//adicionar a lista de produtos os ids dos produtos, editar os parametros dos produtos dentro da lista, remover um produto
-		public void addToList(Product p){
-			productList.put(p.getId(),p);
-			System.out.println(productList);
+	private static LinkedHashMap<Integer, Entity> entityList = new LinkedHashMap<>();
+		private static Integer id = 0;
+		public static Integer getNextId(){
+			return ++id;
 		}
 		
-		public void editItem(Integer id, float discount, float tax, float saleprice){
-			productList.get(id).setId(id);
-			productList.get(discount).setDiscount(discount);
-			productList.get(tax).setTax(tax);
-			productList.get(saleprice).setSalePrice(saleprice);
+	//adicionar a lista de produtos os ids dos produtos, ou remover um produto
+		public void addToList(Entity e){
+			entityList.put(e.getId(),e);	
 		}
 		
-		public void removeItem(Product p){
-			productList.remove(p.getId(),p);
+		public void removeItem(Entity e){
+			entityList.remove(e.getId(),e);
+		}
+		
+		//se a lista,quer dos products ou shelves, estiver vazia, retorna vazio
+		public boolean isEmpty(){
+			return entityList.isEmpty();
 		}
 
+		//
+		public Set<Integer> keySet(){
+			return entityList.keySet();
+		}
+		
+		public Entity get(Integer id){
+			return entityList.get(id);
+		}
+		
+		
 }
 
-//https://stackoverflow.com/questions/14243923/deleting-a-selected-item-using-linked-hash-map
+
 
