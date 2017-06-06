@@ -180,7 +180,24 @@ public class TextInterface {
 		}
 	}
 	
-
+	/* uma outra maneira de fazer mas ver se funciona
+	public static int validateInt(scanner){
+		Scanner scanner = new Scanner(System.in);
+		int input;
+		
+		do{
+			System.out.println("Por favor insira um número");
+			while(!scanner.hasNextInt(){
+				String input = scanner.next();
+				System.out.println("Tente de novo");
+			}
+			input = scanner.nextInt();
+		}
+		while (scanner>=0){
+		System.out.println("" + input);
+	}
+	*/
+	
 	//encontrar uma maneira mais simples!
 	public static float validatefloat(Scanner s, boolean emptyAllowed){
 		String string ="";
@@ -222,19 +239,18 @@ public class TextInterface {
 		/*
 			a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
 			se nao inserir nada assumir o valor anteriores
-			aparecer o produto com os novos valores inseridos pelo utilizador 
 		*/
 		
 	 
-		//???
+		//depois de o utilizador inserir os novos dados validar e guardar o produto na lista???
 		System.out.println("Insira o novo valor de desconto: ");
-		 
+		Float newDiscount = validatefloat(s,false); 
 		System.out.println("Insira o novo valor de IVA: ");
-	
+		Float newTax = validatefloat(s,false);
 		System.out.println("Insira o novo valor de PVP: ");
-
-               
-				
+		Float newSalePrice = validatefloat(s,false);
+		ProductRepository.getInstance().editItem(id,newDiscount,newTax,newSalePrice);      
+			
 		menu_principal();		
 	}
 	
@@ -247,7 +263,6 @@ public class TextInterface {
 		Integer id = validateInt(s,false);
 		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
 				ProductRepository.getInstance().showProduct(id));
-		
 		menu_principal();	
 	}
 	

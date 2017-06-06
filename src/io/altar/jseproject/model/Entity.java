@@ -2,7 +2,7 @@ package io.altar.jseproject.model;
 
 public class Entity {
 
-	//os metodos comuns ao product e shelf
+	//Superclass - contém os métodos comuns ao Product e Shelf
 	
 	private Integer id;
 	
@@ -18,3 +18,5 @@ public class Entity {
 	}
 	*/
 }
+
+
