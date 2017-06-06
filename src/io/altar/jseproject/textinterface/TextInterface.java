@@ -180,7 +180,7 @@ public class TextInterface {
 		}
 	}
 	
-	/* uma outra maneira de fazer mas ver se funciona
+	/* uma outra maneira de fazer mas ver se funciona!!
 	public static int validateInt(scanner){
 		Scanner scanner = new Scanner(System.in);
 		int input;
