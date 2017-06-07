@@ -134,7 +134,7 @@ public class TextInterface {
 		Scanner s = new Scanner(System.in);
 			//o utilizador n�o precisa de escrever o id porque � gerado automaticamente
 		//o utilizador preenche os outros campos, sendo que � preciso validar o que escreve
-		System.out.println("Inserir Id do produto:");
+		//System.out.println("Inserir Id do produto:");
 		//ver isto melhor!
 		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
@@ -152,7 +152,7 @@ public class TextInterface {
 		//voltar para o menu principal
 		menu_principal();
 		
-		//falta inserir o produto numa prateleira
+		//falta inserir o produto numa prateleira - pode estar en 0 ou n prateleiras
 		
 	}
 	
@@ -161,9 +161,10 @@ public class TextInterface {
 	//EDITAR PRODUTO - o primeiro passo e o utilizador escolher o id do produto que quer modificar
 	public static void editProduct(){
 		Scanner s = new Scanner(System.in);
-		System.out.println("Indique o Id do produto que quer editar:");
+		System.out.println("Para o Id do produto que quer editar:");
 		Integer id = Utils.validateInt(s,false);
 		//verficar se o id existe na lista, no map!!!!!
+		//o id na lista de produtos aparece-me null
 		boolean keyExist = ProductList.containsKey(key){
 			System.out.println(key);
 		}else{
@@ -206,6 +207,7 @@ public class TextInterface {
 		
 		System.out.println("Inserir Id do produto que quer consultar:");
 		Integer id = Utils.validateInt(s,false);
+
 	//	System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
 	//			ProductRepository.getInstance().showProduct(id));
 		menu_principal();	

@@ -44,11 +44,11 @@ public abstract class EntityRepository<E extends Entity>{
 		public Entity get(Integer id){
 			return entityList.get(id);
 		}	
-			
+			/*
 		public boolean containsKey(key){
 			return getEntry(key) !=null;
 		}
-		
+		*/
 }
 
 
