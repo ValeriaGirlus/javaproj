@@ -14,22 +14,21 @@ public class ProductRepository extends EntityRepository<Product>{
 		return INSTANCE;
 	}
 	
-	//editar os parametros dum produto para o id especificado
-	//o que est� mal?
-	public void editItem(Integer id, float discount, float tax, float saleprice){
-		entityList.get(id).setId(id);
-		entityList.get(id).setDiscount(discount);
-		entityList.get(id).setTax(tax);
-		entityList.get(id).setSalePrice(saleprice);
+	//editar os campos dum produto para o id especificado
+	public static void editItem(Integer id, float discount, float tax, float saleprice){
+		//(casting) vai buscar o id ao EntityRepository pq está lá este método mas o set está na class Produto 
+		((Product)ProductRepository.getInstance().get(id)).setDiscount(discount);
+		((Product)ProductRepository.getInstance().get(id)).setTax(tax);
+		((Product)ProductRepository.getInstance().get(id)).setSalePrice(saleprice);
 	}
 	
 	//criar o metodo showProduct() para mostrar os campos do produto quando se introduz o id 
-	//o que est� mal?
-	public static void showProduct(){
-		return entityList.getId(id);
-		return entityList.get(id).get(discount);
-		return entityList.get(id).get(tax);
-		return entityList.get(id).get(saleprice);
+	//o que est� mal???????????
+	public void showProduct(){
+		.get(id);
+		.get(id).get(discount);
+		.get(id).get(tax);
+		.get(id).get(saleprice);
 	}
 	
 }

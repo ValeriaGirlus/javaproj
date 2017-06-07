@@ -11,16 +11,19 @@ public abstract class EntityRepository<E extends Entity>{
 	// ArrayList<Product> Products = new ArrayList<Product>();
 	
 	private static LinkedHashMap<Integer, Entity> entityList = new LinkedHashMap<>();
-	//o linkhashmap mantém a ordem de inserção dos elementos na lista de produtos ou prateleira
-	//por cada produto ou prateleira criada, o id é incrementado por 1 em relação ao 0
+	//o linkhashmap mantï¿½m a ordem de inserï¿½ï¿½o dos elementos na lista de produtos ou prateleira
+	//por cada produto ou prateleira criada, o id ï¿½ incrementado por 1 em relaï¿½ï¿½o ao 0
 		private static Integer id = 0;
 		public static Integer getNextId(){
 			return ++id;
 		}
 		
-	//neste caso, adicionar o id à lista entityList ou remover, refere-se tanto aos produtos como às prateleiras 
+	//neste caso, adicionar o id ï¿½ lista entityList ou remover, refere-se tanto aos produtos como ï¿½s prateleiras 
 		public void addToList(Entity e){
-			entityList.put(e.getId(),e);	
+			entityList.put(e.getId(),e);
+			for(Integer key : entityList.keySet()){
+				System.out.println("Key= " + key );
+			}
 		}
 		
 		public void removeItem(Entity e){
@@ -40,8 +43,11 @@ public abstract class EntityRepository<E extends Entity>{
 		//nao percebo muito bem isto
 		public Entity get(Integer id){
 			return entityList.get(id);
+		}	
+			
+		public boolean containsKey(key){
+			return getEntry(key) !=null;
 		}
-		
 		
 }
 

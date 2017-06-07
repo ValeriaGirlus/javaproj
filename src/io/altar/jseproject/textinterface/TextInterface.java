@@ -6,6 +6,7 @@ import io.altar.jseproject.Repository.ProductRepository;
 import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
+import io.altar.jseproject.util.Utils;;
 
 
 public class TextInterface {
@@ -13,9 +14,9 @@ public class TextInterface {
 	public static ProductRepository ProductList = ProductRepository.getInstance();
 	
 	//---------------------------------------menu principal--------------------------------------------------
-	//as opções que aparecem ao utilizador no primeiro ecrã que é o menu principal i.e o primeiro que aparece
+	//as opï¿½ï¿½es que aparecem ao utilizador no primeiro ecrï¿½ que ï¿½ o menu principal i.e o primeiro que aparece
 	public static void menu_principal() {
-		System.out.println("Por favor seleccione uma das seguintes opções:");
+		System.out.println("Por favor seleccione uma das seguintes opï¿½ï¿½es:");
 		System.out.println("1)Listar produtos");
 		System.out.println("2)Listar prateleiras");
 		System.out.println("3)Sair");
@@ -32,28 +33,28 @@ public class TextInterface {
 	}
 	
 	//-------------------------------------menu produtos----------------------------------------------------
-	//o utilizador ao clicar 1 no menu principal aparece um segundo ecrã com o menu para os produtos
+	//o utilizador ao clicar 1 no menu principal aparece um segundo ecrï¿½ com o menu para os produtos
 	public static void menu_product() {
-		// aparecer a lista dos produtos que há, antes de aparecerem as opções
+		// aparecer a lista dos produtos que hï¿½, antes de aparecerem as opï¿½ï¿½es
 		System.out.println("Lista de produtos:");
 		String string = "";
 		
 		if(ProductList.isEmpty()){
-			System.out.println("A lista está vazia");
+			System.out.println("A lista estï¿½ vazia");
 			
-			//nao percebo muito bem isto
+		}
+		else{
 			for(Integer id : ProductList.keySet()){
-				System.out.println(ProductList.get(id));
-			}
-			//nao me aparece a lista de produtos quando insiro mais produtos!!!!!
-		}				
-		
-		System.out.println("Por favor seleccione uma das seguintes opções:");
+					System.out.println(ProductList.get(id));
+				}
+		}
+		//o id aparece null na lista de produtos!!!!!!
+		System.out.println("Por favor seleccione uma das seguintes opï¿½ï¿½es:");
 		System.out.println("1)Criar novo produto");
 		System.out.println("2)Editar um produto existente");
 		System.out.println("3)Consultar o detalhe do produto");
 		System.out.println("4)Remover um produto");
-		System.out.println("5)Voltar ao ecrã anterior");
+		System.out.println("5)Voltar ao ecrï¿½ anterior");
 		
 		int input = getInput(1,5);
 		switch(input){
@@ -76,14 +77,14 @@ public class TextInterface {
 	}
 
 	//-----------------------------------menu prateleiras--------------------------------------------------
-	//o utilizador ao clicar 2 no menu principal aparece um segundo ecrã com o menu para as prateleiras
+	//o utilizador ao clicar 2 no menu principal aparece um segundo ecrï¿½ com o menu para as prateleiras
 	public static void menu_shelf() {
-		System.out.println("Por favor seleccione uma das seguintes opções:");
+		System.out.println("Por favor seleccione uma das seguintes opï¿½ï¿½es:");
 		System.out.println("1)Criar nova prateleira");
 		System.out.println("2)Editar uma prateleira existente");
 		System.out.println("3)Consultar o detalhe da prateleira");
 		System.out.println("4)Remover uma prateleira");
-		System.out.println("5)Voltar ao ecrã anterior");
+		System.out.println("5)Voltar ao ecrï¿½ anterior");
 		
 		int input = getInput(1,5);
 		switch(input){
@@ -106,7 +107,7 @@ public class TextInterface {
 	}
 	
 	//-----------------------------------------------menu principal-----------------------------------------------------------
-	//no menu_principal o utilizador tem que inserir uma opção das 3 disponíveis (mínimo o valor 1 e máximo o valor 3) 
+	//no menu_principal o utilizador tem que inserir uma opï¿½ï¿½o das 3 disponï¿½veis (mï¿½nimo o valor 1 e mï¿½ximo o valor 3) 
 	public static int getInput(int min, int max) {
 		Scanner s = new Scanner(System.in);
 		int input = 0;
@@ -131,18 +132,18 @@ public class TextInterface {
 	//CRIAR PRODUTO
 	public static void createProduct(){
 		Scanner s = new Scanner(System.in);
-			//o utilizador não precisa de escrever o id porque é gerado automaticamente
-		//o utilizador preenche os outros campos, sendo que é preciso validar o que escreve
+			//o utilizador nï¿½o precisa de escrever o id porque ï¿½ gerado automaticamente
+		//o utilizador preenche os outros campos, sendo que ï¿½ preciso validar o que escreve
 		System.out.println("Inserir Id do produto:");
 		//ver isto melhor!
 		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
-		Float discount = validatefloat(s,false);
+		Float discount = Utils.validatefloat(s,false);
 		System.out.println("Inserir IVA do produto:");
-		Float tax = validatefloat(s, false);
+		Float tax = Utils.validatefloat(s, false);
 		System.out.println("Inserir PVP do produto:");
-		Float saleprice = validatefloat(s, false);
-		//os campos que foram preenchidos vão ser inseridos no produto e vai aparecer neste formato cada produto 
+		Float saleprice = Utils.validatefloat(s, false);
+		//os campos que foram preenchidos vï¿½o ser inseridos no produto e vai aparecer neste formato cada produto 
 		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice);	
 		
 		//perceber isto melhor!
@@ -151,105 +152,49 @@ public class TextInterface {
 		//voltar para o menu principal
 		menu_principal();
 		
-	}
-	
-	//validar o que o utilizador insere nos campos para CRIAR PRODUTO - id do produto (pode inserir string, numero ou nada)
-	//encontrar uma maneira mais simples!
-	public static Integer validateInt(Scanner s, boolean emptyAllowed){
-		String string ="";
-		Integer value = null;
-		while(true){
-			string = s.nextLine();
-			if(string.isEmpty()){
-				if(emptyAllowed){
-					return null;
-				}
-				else{
-					System.out.println("Tente outra vez");
-				}				
-			}
-			else{
-				try{
-					value = Integer.parseInt(string);
-					return value;
-				}
-				catch(Exception e){
-					System.out.println("Tente outra vez");
-				}
-			}
-		}
-	}
-	
-	/* uma outra maneira de fazer mas ver se funciona!!
-	public static int validateInt(scanner){
-		Scanner scanner = new Scanner(System.in);
-		int input;
+		//falta inserir o produto numa prateleira
 		
-		do{
-			System.out.println("Por favor insira um número");
-			while(!scanner.hasNextInt(){
-				String input = scanner.next();
-				System.out.println("Tente de novo");
-			}
-			input = scanner.nextInt();
-		}
-		while (scanner>=0){
-		System.out.println("" + input);
 	}
-	*/
 	
-	//encontrar uma maneira mais simples!
-	public static float validatefloat(Scanner s, boolean emptyAllowed){
-		String string ="";
-		Integer value = null;
-		while(true){
-			string = s.nextLine();
-			if(string.isEmpty()){
-				if(emptyAllowed){
-					return (Float) null;
-				}
-				else{
-					System.out.println("Tente outra vez");
-				}				
-			}
-			else{
-				try{
-					value = Integer.parseInt(string);
-					return value;
-				}
-				catch(Exception e){
-					System.out.println("Tente outra vez");
-					
-				}
-			}
-		}
-	}
 	
 	 
 	//EDITAR PRODUTO - o primeiro passo e o utilizador escolher o id do produto que quer modificar
 	public static void editProduct(){
 		Scanner s = new Scanner(System.in);
 		System.out.println("Indique o Id do produto que quer editar:");
-		Integer id = validateInt(s,false);
+		Integer id = Utils.validateInt(s,false);
+		//verficar se o id existe na lista, no map!!!!!
+		boolean keyExist = ProductList.containsKey(key){
+			System.out.println(key);
+		}else{
+			System.out.println("Este Id nao existe na lista de produtos");
+		}
+		//https://crunchify.com/java-hashmap-containskeyobject-key-and-containsvalueobject-value-check-if-key-exists-in-map/
+		//dizer que o produto estÃ¡ na prateleira x
+		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "estÃ¡ guardado na prateleira" +  );
 		
-		//a seguir mostrar os restantes campos associados a esse produto com esse id através do método showProduct()
+		
+		//a seguir mostrar os restantes campos associados a esse produto com esse id atravï¿½s do mï¿½todo showProduct()
 		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
 							ProductRepository.getInstance().showProduct(id));
 		
 		/*
-			a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
-			se nao inserir nada assumir o valor anteriores
+		a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
+		se nao inserir nada assumir o valor anteriores
+		depois de o utilizador inserir os novos dados validar e guardar o produto na lista
 		*/
-		
-	 
-		//depois de o utilizador inserir os novos dados validar e guardar o produto na lista???
 		System.out.println("Insira o novo valor de desconto: ");
-		Float newDiscount = validatefloat(s,false); 
+		Float newDiscount = Utils.validatefloat(s,false); 
 		System.out.println("Insira o novo valor de IVA: ");
-		Float newTax = validatefloat(s,false);
+		Float newTax = Utils.validatefloat(s,false);
 		System.out.println("Insira o novo valor de PVP: ");
-		Float newSalePrice = validatefloat(s,false);
-		ProductRepository.getInstance().editItem(id,newDiscount,newTax,newSalePrice);      
+		Float newSalePrice = Utils.validatefloat(s,false);
+		System.out.println("Product: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice);
+		
+		
+		ProductRepository.editItem(id, newDiscount, newTax, newSalePrice);
+		
+	
 			
 		menu_principal();		
 	}
@@ -260,9 +205,9 @@ public class TextInterface {
 		Scanner s = new Scanner(System.in);
 		
 		System.out.println("Inserir Id do produto que quer consultar:");
-		Integer id = validateInt(s,false);
-		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
-				ProductRepository.getInstance().showProduct(id));
+		Integer id = Utils.validateInt(s,false);
+	//	System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
+	//			ProductRepository.getInstance().showProduct(id));
 		menu_principal();	
 	}
 	
@@ -272,20 +217,12 @@ public class TextInterface {
 		Scanner s = new Scanner(System.in);
 		
 		System.out.println("Inserir Id do produto que quer eliminar:");
-		Integer id = validateInt(s,false);
+	//	Integer id = validateInt(s,false);
 		
 		menu_principal();	
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	//------------------------------------------------menu prateleiras--------------------------------------------------------------
 	//  falta fazer
 	public static void createShelf(){
@@ -306,4 +243,4 @@ public class TextInterface {
 	
 }
 			
-		//https://stackoverflow.com/questions/14243923/deleting-a-selected-item-using-linked-hash-map		
+				
