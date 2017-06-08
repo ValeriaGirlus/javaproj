@@ -24,14 +24,4 @@ public class ProductRepository extends EntityRepository<Product>{
 		((Product)ProductRepository.getInstance().get(id)).setTax(tax);
 		((Product)ProductRepository.getInstance().get(id)).setSalePrice(saleprice);
 	}
-	
-	//criar o metodo showProduct() para mostrar os campos do produto quando se introduz o id 
-	//isto está bem???????????
-	public String showProduct(Integer id){	
-		Float discount = ((Product)ProductRepository.getInstance().get(id)).getDiscount();
-		Float tax =((Product)ProductRepository.getInstance().get(id)).getTax();
-		Float saleprice = ((Product)ProductRepository.getInstance().get(id)).getSalePrice();
-		return "Product ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice ;
-	}
-	
 }

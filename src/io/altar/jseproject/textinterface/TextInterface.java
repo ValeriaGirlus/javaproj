@@ -3,15 +3,18 @@ package io.altar.jseproject.textinterface;
 import java.util.Scanner;
 
 import io.altar.jseproject.Repository.ProductRepository;
+import io.altar.jseproject.Repository.ShelfRepository;
 import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
+import io.altar.jseproject.model.Shelf;
 import io.altar.jseproject.util.Utils;;
 
 
 public class TextInterface {
 	
 	public static ProductRepository ProductList = ProductRepository.getInstance();
+	public static ProductRepository ShelfList = ShelfRepository.getInstance();
 	
 	//---------------------------------------menu principal--------------------------------------------------
 	//as op��es que aparecem ao utilizador no primeiro ecr� que � o menu principal i.e o primeiro que aparece
@@ -37,8 +40,6 @@ public class TextInterface {
 	public static void menu_product() {
 		// aparecer a lista dos produtos que h�, antes de aparecerem as op��es
 		System.out.println("Lista de produtos:");
-		String string = "";
-		
 		if(ProductList.isEmpty()){
 			System.out.println("A lista est� vazia");
 			
@@ -49,6 +50,7 @@ public class TextInterface {
 				}
 		}
 		//o id aparece null na lista de produtos!!!!!!
+		
 		System.out.println("Por favor seleccione uma das seguintes op��es:");
 		System.out.println("1)Criar novo produto");
 		System.out.println("2)Editar um produto existente");
@@ -132,9 +134,9 @@ public class TextInterface {
 	//CRIAR PRODUTO
 	public static void createProduct(){
 		Scanner s = new Scanner(System.in);
-			//o utilizador n�o precisa de escrever o id porque � gerado automaticamente
+		//o utilizador n�o precisa de escrever o id porque � gerado automaticamente
 		//o utilizador preenche os outros campos, sendo que � preciso validar o que escreve
-		//System.out.println("Inserir Id do produto:");
+		System.out.println("Inserir Id do produto:");
 		//ver isto melhor!
 		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
@@ -156,81 +158,110 @@ public class TextInterface {
 		
 	}
 	
-	
-	 
 	//EDITAR PRODUTO - o primeiro passo e o utilizador escolher o id do produto que quer modificar
 	public static void editProduct(){
-		Scanner s = new Scanner(System.in);
-		System.out.println("Para o Id do produto que quer editar:");
-		Integer id = Utils.validateInt(s,false);
-		//verficar se o id existe na lista, no map!!!!!
-		//o id na lista de produtos aparece-me null
-		boolean keyExist = ProductList.containsKey(key){
-			System.out.println(key);
+		if(ProductList.isEmpty()){
+			System.out.println("Nao existe nenhum produto disponível para editar");
 		}else{
-			System.out.println("Este Id nao existe na lista de produtos");
+			Scanner s = new Scanner(System.in);
+			System.out.println("Para o Id do produto que quer editar:");
+			Integer id = Utils.validateInt(s,false);
+			//verificar se o id existe na lista dos produtos
+			int key = s.nextInt();
+			if (ProductList.containsKey(key)){
+				System.out.println("Key:" + key);
+			}else{
+				System.out.println("Este Id nao existe na lista de produtos");
 		}
-		//https://crunchify.com/java-hashmap-containskeyobject-key-and-containsvalueobject-value-check-if-key-exists-in-map/
+			
 		//dizer que o produto está na prateleira x
 		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  );
 		
-		
-		//a seguir mostrar os restantes campos associados a esse produto com esse id atrav�s do m�todo showProduct()
+		//a seguir mostrar os restantes campos associados a esse produto com esse id 
 		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
-							ProductRepository.getInstance().showProduct(id));
+				ProductList.get(id));
 		
-		/*
-		a seguir dizer ao utilizador para inserir nestes 3 campos os valores que quer alterar
-		se nao inserir nada assumir o valor anteriores
-		depois de o utilizador inserir os novos dados validar e guardar o produto na lista
-		*/
+		//a seguir dizer o utilizador altera os 3 campos, se nao inserir nada assumir o valor anteriores
+		//depois de o utilizador inserir os novos dados validar e guardar o produto na lista
 		System.out.println("Insira o novo valor de desconto: ");
-		Float newDiscount = Utils.validatefloat(s,false); 
+		//Float newDiscount = Utils.validatefloat(s,false);
+		while(true){
+		Scanner sc = new Scanner(System.in);
+		float newDiscount = sc.nextFloat();
+		if(newDiscount =   ){
+			
+			}
+		}
 		System.out.println("Insira o novo valor de IVA: ");
 		Float newTax = Utils.validatefloat(s,false);
 		System.out.println("Insira o novo valor de PVP: ");
 		Float newSalePrice = Utils.validatefloat(s,false);
 		System.out.println("Product: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice);
 		
-		
-		ProductRepository.editItem(id, newDiscount, newTax, newSalePrice);
-		
-	
-			
+		ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
+					
 		menu_principal();		
+		}
 	}
-	
 	//CONSULTAR PRODUTO - o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
-	//o que falta?
 	public static void consultProduct(){
 		Scanner s = new Scanner(System.in);
-		
+		if(ProductList.isEmpty()){
+			System.out.println("Nao existe nenhum produto");		
+		}else{
 		System.out.println("Inserir Id do produto que quer consultar:");
 		Integer id = Utils.validateInt(s,false);
 
-	//	System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
-	//			ProductRepository.getInstance().showProduct(id));
+		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + ProductList.get(id) + "e enconta-se na parteleira");
 		menu_principal();	
+		}
 	}
-	
 	//REMOVER PRODUTO - o utilizador primeiro introduz o id do produto que quer remover 
-	//o que falta?
 	public static void removeProduct(){
-		Scanner s = new Scanner(System.in);
-		
-		System.out.println("Inserir Id do produto que quer eliminar:");
-	//	Integer id = validateInt(s,false);
-		
-		menu_principal();	
+		if(ProductList.isEmpty()){
+			System.out.println("Nao existe nenhum produto disponível para eliminar");
+		}else{
+			Scanner s = new Scanner(System.in);
+			System.out.println("Inserir Id do produto que quer eliminar:");
+			Integer id = Utils.validateInt(s,false);
+			System.out.println("Tem a certeza que pretende eliminar este produto? Se sim pressione S, se nao pressione N");
+			while(true){
+				String letter = s.nextLine();
+				if (letter.equals("S")){
+					ProductList.removeItem(id);
+					TextInterface.menu_product();;	
+				}else if(letter.equals("N")){
+					TextInterface.menu_product();
+				}else
+					System.out.println("Este Id nao existe na lista de produtos");
+				}
+			}	
+		TextInterface.menu_principal();	
 	}
 	
-		
 	//------------------------------------------------menu prateleiras--------------------------------------------------------------
-	//  falta fazer
+	
 	public static void createShelf(){
+		Scanner s = new Scanner(System.in);
+		//o utilizador n�o precisa de escrever o id porque � gerado automaticamente
+		//o utilizador preenche os outros campos, sendo que � preciso validar o que escreve
+		System.out.println("Inserir Id do produto:");		
+		Integer id = ShelfRepository.getNextId();
+		System.out.println("Inserir a localizacao da prateleira:");
+		int location = Utils.validateInt(s,false);
+		System.out.println("Inserir IVA do produto:");
+		int capacity = Utils.validateInt(s,false);
+		System.out.println("Inserir PVP do produto:");
+		Float price = Utils.validatefloat(s,false);
+		System.out.println("Product: " + " ID:" + id + " Location:" + location + "Capacity :" + capacity + " Price:" + price);	
+		
+		new Shelf(id,location,capacity,price);
+						
+		menu_principal();
+		
+		//falta dizer que a prateleira tem x produtos
 		
 	}
-	
 	public static void editShelf(){
 		
 	}

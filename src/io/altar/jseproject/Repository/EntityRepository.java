@@ -20,14 +20,12 @@ public abstract class EntityRepository<E extends Entity>{
 		
 	//neste caso, adicionar o id � lista entityList ou remover, refere-se tanto aos produtos como �s prateleiras 
 		public void addToList(Entity e){
+			e.setId(id);
 			entityList.put(e.getId(),e);
-			for(Integer key : entityList.keySet()){
-				System.out.println("Key= " + key );
-			}
 		}
 		
-		public void removeItem(Entity e){
-			entityList.remove(e.getId(),e);
+		public void removeItem(Integer id){
+			entityList.remove(id);
 		}
 		
 		//se a lista,quer dos products ou shelves, estiver vazia, retorna vazio
@@ -44,11 +42,11 @@ public abstract class EntityRepository<E extends Entity>{
 		public Entity get(Integer id){
 			return entityList.get(id);
 		}	
-			/*
-		public boolean containsKey(key){
-			return getEntry(key) !=null;
+			
+		public boolean containsKey(int key){
+			return entityList.containsKey(key);
 		}
-		*/
+		
 }
 
 

@@ -31,24 +31,6 @@ public class Utils {
 			}
 		}
 		
-		/* uma outra maneira de fazer mas ver se funciona!!
-		public static int validateInt(scanner){
-			Scanner scanner = new Scanner(System.in);
-			int input;
-			
-			do{
-				System.out.println("Por favor insira um número");
-				while(!scanner.hasNextInt(){
-					String input = scanner.next();
-					System.out.println("Tente de novo");
-				}
-				input = scanner.nextInt();
-			}
-			while (scanner>=0){
-			System.out.println(input);
-		}
-		*/
-		
 		//encontrar uma maneira mais simples!
 		public static float validatefloat(Scanner s, boolean emptyAllowed){
 			String string ="";
@@ -74,8 +56,23 @@ public class Utils {
 					}
 				}
 			}
-		}
-		
-		
-		
+		}	
 }
+
+		/* uma outra maneira de fazer mas ver se funciona!!
+		public static int validateInt(scanner){
+			Scanner scanner = new Scanner(System.in);
+			int input;
+			
+			do{
+				System.out.println("Por favor insira um número");
+				while(!scanner.hasNextInt(){
+					String input = scanner.next();
+					System.out.println("Tente de novo");
+				}
+				input = scanner.nextInt();
+			}
+			while (scanner>=0){
+			System.out.println(input);
+		}
+		*/
