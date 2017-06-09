@@ -14,7 +14,7 @@ import io.altar.jseproject.util.Utils;;
 public class TextInterface {
 	
 	public static ProductRepository ProductList = ProductRepository.getInstance();
-	public static ProductRepository ShelfList = ShelfRepository.getInstance();
+	public static ShelfRepository ShelfList = ShelfRepository.getInstance();
 	
 	//---------------------------------------menu principal--------------------------------------------------
 	//as op��es que aparecem ao utilizador no primeiro ecr� que � o menu principal i.e o primeiro que aparece
@@ -164,45 +164,45 @@ public class TextInterface {
 			System.out.println("Nao existe nenhum produto disponível para editar");
 		}else{
 			Scanner s = new Scanner(System.in);
-			System.out.println("Para o Id do produto que quer editar:");
+			System.out.println("Insira o Id do produto que quer editar:");
 			Integer id = Utils.validateInt(s,false);
 			//verificar se o id existe na lista dos produtos
-			int key = s.nextInt();
-			if (ProductList.containsKey(key)){
-				System.out.println("Key:" + key);
+			if (ProductList.containsKey(id)){
+				System.out.println("O produto contém a seguinte informacao:" + ProductList.get(id));
+				System.out.println("Tem a certeza que pretende editar este produto? Se sim pressione s, se nao pressione n");
+				while(true){
+					String letter = s.nextLine();
+					if (letter.equals("s")){
+						System.out.println("Para mudar o valor do desconto insire um novo valor: ");
+						Float newDiscount = Utils.validatefloat(s, false);
+						System.out.println("Para mudar o valor do IVA insire um novo valor: ");
+						Float newTax = Utils.validatefloat(s, false);
+						System.out.println("Para mudar o valor do PVP insire um novo valor: ");
+						Float newSalePrice = Utils.validatefloat(s, false);
+						System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice);
+						System.out.println("Para voltar ao menu principal pressione ");
+						String  = s.nextLine();
+							while(true){
+							if (letter.equals("s")){
+							menu_product();
+							}
+							}
+					}else if(letter.equals("n")){
+						TextInterface.menu_product();
+				
 			}else{
 				System.out.println("Este Id nao existe na lista de produtos");
-		}
-			
-		//dizer que o produto está na prateleira x
-		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  );
-		
-		//a seguir mostrar os restantes campos associados a esse produto com esse id 
-		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + 
-				ProductList.get(id));
-		
-		//a seguir dizer o utilizador altera os 3 campos, se nao inserir nada assumir o valor anteriores
-		//depois de o utilizador inserir os novos dados validar e guardar o produto na lista
-		System.out.println("Insira o novo valor de desconto: ");
-		//Float newDiscount = Utils.validatefloat(s,false);
-		while(true){
-		Scanner sc = new Scanner(System.in);
-		float newDiscount = sc.nextFloat();
-		if(newDiscount =   ){
-			
+					}
+				}
 			}
 		}
-		System.out.println("Insira o novo valor de IVA: ");
-		Float newTax = Utils.validatefloat(s,false);
-		System.out.println("Insira o novo valor de PVP: ");
-		Float newSalePrice = Utils.validatefloat(s,false);
-		System.out.println("Product: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice);
+			//ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
+			
+		//dizer que o produto está na prateleira x
+		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  )
 		
-		ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
-					
-		menu_principal();		
-		}
 	}
+					
 	//CONSULTAR PRODUTO - o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
 	public static void consultProduct(){
 		Scanner s = new Scanner(System.in);
@@ -224,27 +224,25 @@ public class TextInterface {
 			Scanner s = new Scanner(System.in);
 			System.out.println("Inserir Id do produto que quer eliminar:");
 			Integer id = Utils.validateInt(s,false);
-			System.out.println("Tem a certeza que pretende eliminar este produto? Se sim pressione S, se nao pressione N");
+			System.out.println("Tem a certeza que pretende eliminar este produto? Se sim pressione s, se nao pressione n");
 			while(true){
 				String letter = s.nextLine();
-				if (letter.equals("S")){
+				if (letter.equals("s")){
 					ProductList.removeItem(id);
-					TextInterface.menu_product();;	
-				}else if(letter.equals("N")){
+					menu_product();	
+				}else if(letter.equals("n")){
 					TextInterface.menu_product();
 				}else
 					System.out.println("Este Id nao existe na lista de produtos");
 				}
 			}	
-		TextInterface.menu_principal();	
+		menu_principal();	
 	}
 	
 	//------------------------------------------------menu prateleiras--------------------------------------------------------------
 	
 	public static void createShelf(){
 		Scanner s = new Scanner(System.in);
-		//o utilizador n�o precisa de escrever o id porque � gerado automaticamente
-		//o utilizador preenche os outros campos, sendo que � preciso validar o que escreve
 		System.out.println("Inserir Id do produto:");		
 		Integer id = ShelfRepository.getNextId();
 		System.out.println("Inserir a localizacao da prateleira:");
@@ -260,20 +258,72 @@ public class TextInterface {
 		menu_principal();
 		
 		//falta dizer que a prateleira tem x produtos
-		
-	}
+		}
+	
+	
 	public static void editShelf(){
+		if(ShelfList.isEmpty()){
+			System.out.println("Nao existe nenhuma prateleira disponível para editar");
+		}else{
+			Scanner s = new Scanner(System.in);
+			System.out.println("Insira o Id da prateleira que quer editar:");
+			Integer id = Utils.validateInt(s,false);
+			//verificar se o id existe na lista dos produtos
+			if (ShelfList.containsKey(id)){
+				System.out.println("A prateleira contém a seguinte informacao:" + ShelfList.get(id));
+				System.out.println("Para mudar o valor da localizacao insire um novo valor: ");
+				Float newLocation = Utils.validatefloat(s, false);
+				System.out.println("Para mudar o valor da capacidade insire um novo valor: ");
+				Float newCapacity = Utils.validatefloat(s, false);
+				System.out.println("Para mudar o valor do preco insire um novo valor: ");
+				Float newPrice = Utils.validatefloat(s, false);
+				System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Location: " + newLocation + " Capacity: " + newCapacity + "Price: " + newPrice);
+			}else{
+				System.out.println("Este Id nao existe na lista de prateleiras");
+		}
 		
+			//ShelfRepository.editItem(id,newLocation,newCapacity,newPrice);
+								
+		menu_principal();		
+		}
 	}
 	
 	public static void consultShelf(){
+		Scanner s = new Scanner(System.in);
+		if(ShelfList.isEmpty()){
+			System.out.println("Nao existe nenhuma prateleira");		
+		}else{
+		System.out.println("Inserir Id da prateleira que quer consultar:");
+		Integer id = Utils.validateInt(s,false);
 		
+		//falta ir buscar os produtos contidos nessa prateleira
+		System.out.println("A prateleira com o Id especificado apresenta os seguintes valores: " + ShelfList.get(id) + "e contem os seguintes produtos:");
+		menu_principal();	
+		}
 	}
 	
 	public static void removeShelf(){
-		
+		if(ShelfList.isEmpty()){
+			System.out.println("Nao existe nenhuma prateleira disponível para eliminar");
+		}else{
+			Scanner s = new Scanner(System.in);
+			System.out.println("Inserir Id da prateleira que quer eliminar:");
+			Integer id = Utils.validateInt(s,false);
+			System.out.println("Tem a certeza que pretende eliminar esta prateleira? Se sim pressione s, se nao pressione n");
+			while(true){
+				String letter = s.nextLine();
+				if (letter.equals("s")){
+					ShelfList.removeItem(id);
+					menu_product();;	
+				}else if(letter.equals("n")){
+					menu_product();
+				}else
+					System.out.println("Este Id nao existe na lista de prateleiras");
+				}
+			}	
+		menu_principal();	
 	}
-	
 }
+
 			
 				
