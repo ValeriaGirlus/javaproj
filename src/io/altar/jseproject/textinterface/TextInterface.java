@@ -272,7 +272,7 @@ public class TextInterface {
 			Scanner s = new Scanner(System.in);
 			System.out.println("Insira o Id da prateleira que quer editar:");
 			Integer id = Utils.validateInt(s,false);
-			//verificar se o id existe na lista dos produtos
+		
 			if (ShelfList.containsKey(id)){
 				System.out.println(""
 						+ "A prateleira contém a seguinte informacao:" + ShelfList.get(id));
