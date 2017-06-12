@@ -180,14 +180,16 @@ public class TextInterface {
 						System.out.println("Para mudar o valor do PVP insire um novo valor: ");
 						Float newSalePrice = Utils.validatefloat(s, false);
 						System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice);
+						
+						ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
+						
 						System.out.println("Para voltar ao menu principal pressione ");
-						String  = s.nextLine();
+						String text = s.nextLine();
 							while(true){
-							if (letter.equals("s")){
+							if (text.equals("s")){
 							menu_product();
-							}
-							}
-					}else if(letter.equals("n")){
+							
+					}else if(text.equals("n")){
 						TextInterface.menu_product();
 				
 			}else{
@@ -196,7 +198,8 @@ public class TextInterface {
 				}
 			}
 		}
-			//ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
+	}
+}
 			
 		//dizer que o produto está na prateleira x
 		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  )
@@ -216,6 +219,7 @@ public class TextInterface {
 		menu_principal();	
 		}
 	}
+	
 	//REMOVER PRODUTO - o utilizador primeiro introduz o id do produto que quer remover 
 	public static void removeProduct(){
 		if(ProductList.isEmpty()){
@@ -251,7 +255,7 @@ public class TextInterface {
 		int capacity = Utils.validateInt(s,false);
 		System.out.println("Inserir PVP do produto:");
 		Float price = Utils.validatefloat(s,false);
-		System.out.println("Product: " + " ID:" + id + " Location:" + location + "Capacity :" + capacity + " Price:" + price);	
+		System.out.println("Shelf: " + " ID:" + id + " Location:" + location + "Capacity :" + capacity + " Price:" + price);	
 		
 		new Shelf(id,location,capacity,price);
 						
@@ -270,23 +274,39 @@ public class TextInterface {
 			Integer id = Utils.validateInt(s,false);
 			//verificar se o id existe na lista dos produtos
 			if (ShelfList.containsKey(id)){
-				System.out.println("A prateleira contém a seguinte informacao:" + ShelfList.get(id));
-				System.out.println("Para mudar o valor da localizacao insire um novo valor: ");
-				Float newLocation = Utils.validatefloat(s, false);
-				System.out.println("Para mudar o valor da capacidade insire um novo valor: ");
-				Float newCapacity = Utils.validatefloat(s, false);
-				System.out.println("Para mudar o valor do preco insire um novo valor: ");
-				Float newPrice = Utils.validatefloat(s, false);
-				System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Location: " + newLocation + " Capacity: " + newCapacity + "Price: " + newPrice);
+				System.out.println(""
+						+ "A prateleira contém a seguinte informacao:" + ShelfList.get(id));
+				System.out.println("Tem a certeza que pretende editar esta prateleira? Se sim pressione s, se nao pressione n");
+				while(true){
+					String letter = s.nextLine();
+					if (letter.equals("s")){
+						System.out.println("Para mudar o valor da localizacao insire um novo valor: ");
+						Float newLocation = Utils.validatefloat(s, false);
+						System.out.println("Para mudar o valor da capacidade insire um novo valor: ");
+						Float newCapacity = Utils.validatefloat(s, false);
+						System.out.println("Para mudar o valor do preco insire um novo valor: ");
+						Float newPrice = Utils.validatefloat(s, false);
+						System.out.println("A prateleira modificada apresenta os seguintes valores: " + " ID:" + id + " Location:" + newLocation + "Capacity :" + newCapacity + " Price:" + newPrice);
+						
+						ShelfRepository.editItem(id,newLocation,newCapacity,newPrice);
+						
+						System.out.println("Para voltar ao menu principal pressione ");
+						String text = s.nextLine();
+							while(true){
+							if (text.equals("s")){
+							menu_product();
+							
+					}else if(text.equals("n")){
+						TextInterface.menu_product();
 			}else{
 				System.out.println("Este Id nao existe na lista de prateleiras");
-		}
-		
-			//ShelfRepository.editItem(id,newLocation,newCapacity,newPrice);
-								
-		menu_principal();		
-		}
+						}
+					}
+				}
+			}
+		}	
 	}
+}
 	
 	public static void consultShelf(){
 		Scanner s = new Scanner(System.in);
