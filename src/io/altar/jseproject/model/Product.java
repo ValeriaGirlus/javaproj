@@ -44,9 +44,9 @@ public class Product extends Entity {
 		ProductRepository.getInstance().addToList(this);
 	}
 	
-	//o id nao vai ser inserido pelo utilizador mas vem do método da Superclass 
+	//o id nao vai ser inserido pelo utilizador mas vem do mï¿½todo da Superclass 
 	@Override
 	public String toString(){
-		return "Id: "+ getId() + ", Discount: " + discount + ", IVA: " + tax  + ", PVP: " + saleprice;
+		return "Id: "+ getId() + ", Discount: " + discount + ", IVA: " + tax  + ", PVP: " + saleprice + "\n";
 	}
 }

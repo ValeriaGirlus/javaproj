@@ -20,7 +20,7 @@ public class TextInterface {
 	//---------------------------------------menu principal--------------------------------------------------
 	//as op��es que aparecem ao utilizador no primeiro ecr� que � o menu principal i.e o primeiro que aparece
 	public static void menu_principal() {
-		System.out.println("Por favor seleccione uma das seguintes op��es:");
+		System.out.println("Por favor seleccione uma das seguintes opções: ");
 		System.out.println("1)Listar produtos");
 		System.out.println("2)Listar prateleiras");
 		System.out.println("3)Sair");
@@ -42,22 +42,19 @@ public class TextInterface {
 		// aparecer a lista dos produtos que h�, antes de aparecerem as op��es
 		System.out.println("Lista de produtos:");
 		if(ProductList.isEmpty()){
-			System.out.println("A lista est� vazia");
-			
+			System.out.println("A lista está vazia\n");	
 		}
 		else{
 			for(Integer id : ProductList.keySet()){
 					System.out.println(ProductList.get(id));
-				}
+			}
 		}
-		//o id aparece null na lista de produtos!!!!!!
-		
-		System.out.println("Por favor seleccione uma das seguintes op��es:");
+		System.out.println("Por favor seleccione uma das seguintes opções: ");
 		System.out.println("1)Criar novo produto");
 		System.out.println("2)Editar um produto existente");
 		System.out.println("3)Consultar o detalhe do produto");
 		System.out.println("4)Remover um produto");
-		System.out.println("5)Voltar ao ecr� anterior");
+		System.out.println("5)Voltar ao ecrã anterior");
 		
 		int input = getInput(1,5);
 		switch(input){
@@ -82,18 +79,28 @@ public class TextInterface {
 	//-----------------------------------menu prateleiras--------------------------------------------------
 	//o utilizador ao clicar 2 no menu principal aparece um segundo ecr� com o menu para as prateleiras
 	public static void menu_shelf() {
-		System.out.println("Por favor seleccione uma das seguintes op��es:");
+		
+		System.out.println("Lista de prateleiras:");
+		if(ShelfList.isEmpty()){
+			System.out.println("A lista está vazia\n");	
+		}
+		else{
+			for(Integer id : ShelfList.keySet()){
+					System.out.println(ShelfList.get(id));
+			}
+		}
+		System.out.println("Por favor seleccione uma das seguintes opções: ");
 		System.out.println("1)Criar nova prateleira");
 		System.out.println("2)Editar uma prateleira existente");
 		System.out.println("3)Consultar o detalhe da prateleira");
 		System.out.println("4)Remover uma prateleira");
-		System.out.println("5)Voltar ao ecr� anterior");
+		System.out.println("5)Voltar ao ecrã anterior");
 		
 		int input = getInput(1,5);
 		switch(input){
 		case 1:
 			createShelf();
-			break;
+			break;                                                                         
 		case 2: 
 			editShelf();
 			break;
@@ -121,33 +128,25 @@ public class TextInterface {
 				if (input >= min && input <= max) {
 					return input;
 				} else {
-					System.out.println("Por favor introduza um numero entre " + min + " e " + max);
+					System.out.println("Por favor introduza um número entre " + min + " e " + max);
 				}
 			} else {
-				System.out.println("Por favor introduza um numero");
+				System.out.println("Por favor introduza um número");
 				s.next();
 				s.close();
 			}
 		}
 	}
 	
-	//window, preferences, general, content types, text, meter UTF-8
-	
 	//------------------------------------------------menu produtos-----------------------------------------------------------
 	//CRIAR PRODUTO
 	public static void createProduct(){
-
-		
-		//criar um array da sehlf para guardar os ids dos produtos
+		//criar um array da shelf para guardar os ids dos produtos criados
 		ArrayList <Integer> shelfIdList = new ArrayList();
-
 		
 		Scanner s = new Scanner(System.in);
 		//o utilizador nao precisa de escrever o id porque é gerado automaticamente
 		//o utilizador preenche os outros campos, sendo que é preciso validar o que escreve
-		System.out.println("Inserir Id do produto:");
-
-		
 		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
 		Float discount = Utils.validatefloat(s,false);
@@ -156,126 +155,96 @@ public class TextInterface {
 		System.out.println("Inserir PVP do produto:");
 		Float saleprice = Utils.validatefloat(s, false);
 		//os campos que foram preenchidos vão ser inseridos no produto e vai aparecer neste formato cada produto 
-		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice);	
+		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice + "\n");	
 		
 		new Product(id,discount,tax,saleprice);
+		shelfIdList.add(id);
 		
-
-		
-		//falta inserir o produto numa prateleira - pode estar en 0 ou n prateleiras				
-		
-
+		if(ShelfList.keySet().isEmpty()){
+			System.out.println("Não existem prateleiras disponíveis para guardar o produto\n");
+		}else{
+			System.out.println("Em que prateleira pretende guardar o produto criado?\n");
+			Scanner sc = new Scanner(System.in);
+			
+		}
+	
 		//falta inserir o produto numa prateleira - pode estar em 0 ou n prateleiras
 		//ver quais as prateleiras disponíveis
 		//perguntar ao utilizador em que prateleiras quer guardar o produto
-		
-		
-		
-		shelfIdList.add(id);
-						
 
-		//voltar para o menu principal
-		menu_principal();
 		
-		
-		
+		TextInterface.menu_principal();
 	}
 	
 	//EDITAR PRODUTO - o primeiro passo e o utilizador escolher o id do produto que quer modificar
 	public static void editProduct(){
 		if(ProductList.isEmpty()){
-			System.out.println("Nao existe nenhum produto disponível para editar");
+			System.out.println("Não existe nenhum produto disponível para editar");
 		}else{
 			Scanner s = new Scanner(System.in);
-			System.out.println("Insira o Id do produto que quer editar:");
+			System.out.println("Insira o Id do produto que quer editar:\n");
 			Integer id = Utils.validateInt(s,false);
 			//verificar se o id existe na lista dos produtos
 			if (ProductList.containsKey(id)){
-				System.out.println("O produto contém a seguinte informacao:" + ProductList.get(id));
-				//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  )
-				
-				System.out.println("Tem a certeza que pretende editar este produto? Se sim pressione s, se nao pressione n");
+				System.out.println("O produto contém a seguinte informação:" + ProductList.get(id) + "e encontra-se na prateleira" + ShelfList.get(id));
 
+				System.out.println("Tem a certeza que pretende editar este produto? Se sim pressione s, se não pressione n \n");
 				while(true){
-					String character = s.nextLine();
-					if (character.equals("s")){
-						System.out.println("Para mudar o valor do desconto insire um novo valor: ");
-						Float newDiscount = Utils.validatefloat(s, false);
-						System.out.println("Para mudar o valor do IVA insire um novo valor: ");
-						Float newTax = Utils.validatefloat(s, false);
-						System.out.println("Para mudar o valor do PVP insire um novo valor: ");
-						Float newSalePrice = Utils.validatefloat(s, false);
-						
-						ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
-						
-						System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice);
-						System.out.println("Para voltar ao menu principal pressione m");
-						String text = s.nextLine();
+					Scanner sc = new Scanner(System.in);
+					String letter = sc.nextLine();
+					if (letter.equals("s")){
 						while(true){
-							if (text.equals("m")){
-								menu_product();
+							System.out.println("Para editar este produto:");
+							System.out.println("1)Alterar o valor do desconto: ");
+							System.out.println("2)Alterar o valor do IVA: ");
+							System.out.println("3)Alterar o valor do PVP: ");
+							
+							int input = getInput(1,3);
+							switch(input){
+							case 1:
+								System.out.println("Insira o novo valor do desconto");
+								Float newDiscount = Utils.validatefloat(s, false);
+								ProductRepository.editdiscount(id,newDiscount);
+								System.out.println(ProductList.get(id));
+								break;
+							case 2:	
+								System.out.println("Insira o novo valor do IVA");
+								Float newTax = Utils.validatefloat(s, false);
+								ProductRepository.edittax(id,newTax);
+								System.out.println(ProductList.get(id));
+								break;
+							case 3:		
+								System.out.println("Insira o novo valor do PVP");
+								Float newSalePrice = Utils.validatefloat(s, false);
+								ProductRepository.editsaleprice(id,newSalePrice);
+								System.out.println(ProductList.get(id));
+								break;
+								
 							}
+						TextInterface.menu_product();	
 						}
-					}else if(character.equals("n")){
-						menu_product();
-
-				Scanner sc = new Scanner(System.in);
-				String letter = s.nextLine();
-				
-				if (letter.equals("s")){
-					while(true){
-						System.out.println("1)Para mudar o valor do desconto: ");
-						System.out.println("2)Para mudar o valor do IVA: ");
-						System.out.println("3)Para mudar o valor do PVP: ");
+					//System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice + "\n");
 						
-						int input = getInput(1,3);
-						switch(input){
-						case 1:
-							System.out.println("Insira o novo valor do desconto");
-							Float newDiscount = Utils.validatefloat(s, false);
-							ProductRepository.editdiscount(id,newDiscount);
-							System.out.println(ProductList.get(id));
-							break;
-						case 2:	
-							System.out.println("Insira o novo valor do IVA");
-							Float newTax = Utils.validatefloat(s, false);
-							ProductRepository.edittax(id,newTax);
-							System.out.println(ProductList.get(id));
-							break;
-						case 3:		
-							System.out.println("Insira o novo valor do PVP");
-							Float newSalePrice = Utils.validatefloat(s, false);
-							ProductRepository.editsaleprice(id,newSalePrice);
-							System.out.println(ProductList.get(id));
-							break;
-							}
-						}
-
-				
-					//sair disto
-					
-				}else if(letter.equals("n")){
+					}else if(letter.equals("n")){
 						TextInterface.menu_product();
-					}
-			}else{
-				System.out.println("Este Id nao existe na lista de produtos");
+		}else{
+			System.out.println("Este Id nao existe na lista de produtos");
 				}
 			}
 		}
 	}			
-}				
+}	
+	
 	//CONSULTAR PRODUTO - o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
-	
-	
 	public static void consultProduct(){
 		Scanner s = new Scanner(System.in);
 		if(ProductList.isEmpty()){
-			System.out.println("Nao existe nenhum produto");		
+			System.out.println("Não existe nenhum produto");		
 		}else{
 			System.out.println("Inserir Id do produto que quer consultar:");
 			Integer id = Utils.validateInt(s,false);
 
-		//System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + ProductList.get(id) + "e enconta-se na prateleira");
+		System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + ProductList.get(id) + "e enconta-se na prateleira" + ShelfList.get(id));
 		
 		menu_principal();	
 		}
@@ -284,12 +253,12 @@ public class TextInterface {
 	//REMOVER PRODUTO - o utilizador primeiro introduz o id do produto que quer remover 
 	public static void removeProduct(){
 		if(ProductList.isEmpty()){
-			System.out.println("Nao existe nenhum produto disponível para eliminar");
+			System.out.println("Não existe nenhum produto disponível para eliminar");
 		}else{
 			Scanner s = new Scanner(System.in);
 			System.out.println("Inserir Id do produto que quer eliminar:");
 			Integer id = Utils.validateInt(s,false);
-			System.out.println("Tem a certeza que pretende eliminar este produto? Se sim pressione s, se nao pressione n");
+			System.out.println("Tem a certeza que pretende eliminar este produto? Se sim pressione s, se não pressione n");
 			while(true){
 				String letter = s.nextLine();
 				if (letter.equals("s")){
@@ -299,7 +268,7 @@ public class TextInterface {
 					menu_product();
 					s.close();
 				}else
-					System.out.println("Este Id nao existe na lista de produtos");
+					System.out.println("Este Id não existe na lista de produtos");
 				}
 			}	
 		menu_principal();	
