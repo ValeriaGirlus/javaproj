@@ -3,18 +3,18 @@ package io.altar.jseproject.model;
 import io.altar.jseproject.Repository.ShelfRepository;
 
 public class Shelf extends Entity{
-	//private int shelfId;
+	private int shelfId;
 	private int location;
 	private int capacity;
 	private float price;
-	/*
+	
 	public int getShelfId() {
 		return shelfId;
 	}
 	public void setShelfId(int shelfId) {
 		this.shelfId = shelfId;
 	}
-	*/
+	
 	public int getLocation() {
 		return location;
 	}
@@ -36,7 +36,7 @@ public class Shelf extends Entity{
 	
 	public Shelf(int shelfId, int location, int capacity, float price) {
 		super();
-		//this.shelfId = shelfId;
+		this.shelfId = shelfId;
 		this.location = location;
 		this.capacity = capacity;
 		this.price = price;
