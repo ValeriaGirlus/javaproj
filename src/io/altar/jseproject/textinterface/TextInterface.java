@@ -133,11 +133,13 @@ public class TextInterface {
 	//------------------------------------------------menu produtos-----------------------------------------------------------
 	//CRIAR PRODUTO
 	public static void createProduct(){
+		Integer [] shelfArray = null;
+		
 		Scanner s = new Scanner(System.in);
 		//o utilizador n�o precisa de escrever o id porque � gerado automaticamente
 		//o utilizador preenche os outros campos, sendo que � preciso validar o que escreve
 		System.out.println("Inserir Id do produto:");
-		//ver isto melhor!
+		
 		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
 		Float discount = Utils.validatefloat(s,false);
@@ -148,13 +150,15 @@ public class TextInterface {
 		//os campos que foram preenchidos v�o ser inseridos no produto e vai aparecer neste formato cada produto 
 		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice);	
 		
-		//perceber isto melhor!
 		new Product(id,discount,tax,saleprice);
-						
+		
+		
+		//falta inserir o produto numa prateleira - pode estar en 0 ou n prateleiras				
+		
 		//voltar para o menu principal
 		menu_principal();
 		
-		//falta inserir o produto numa prateleira - pode estar en 0 ou n prateleiras
+		
 		
 	}
 	
@@ -171,24 +175,27 @@ public class TextInterface {
 				System.out.println("O produto contém a seguinte informacao:" + ProductList.get(id));
 				System.out.println("Tem a certeza que pretende editar este produto? Se sim pressione s, se nao pressione n");
 				while(true){
-					String letter = s.nextLine();
-					if (letter.equals("s")){
+					String character = s.nextLine();
+					if (character.equals("s")){
 						System.out.println("Para mudar o valor do desconto insire um novo valor: ");
 						Float newDiscount = Utils.validatefloat(s, false);
 						System.out.println("Para mudar o valor do IVA insire um novo valor: ");
 						Float newTax = Utils.validatefloat(s, false);
 						System.out.println("Para mudar o valor do PVP insire um novo valor: ");
 						Float newSalePrice = Utils.validatefloat(s, false);
+						
+						ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
+						
 						System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Discount:" + newDiscount + " IVA:" + newTax + " PVP:" + newSalePrice);
-						System.out.println("Para voltar ao menu principal pressione ");
-						String  = s.nextLine();
-							while(true){
-							if (letter.equals("s")){
-							menu_product();
+						System.out.println("Para voltar ao menu principal pressione m");
+						String text = s.nextLine();
+						while(true){
+							if (text.equals("m")){
+								menu_product();
 							}
-							}
-					}else if(letter.equals("n")){
-						TextInterface.menu_product();
+						}
+					}else if(character.equals("n")){
+						menu_product();
 				
 			}else{
 				System.out.println("Este Id nao existe na lista de produtos");
@@ -196,7 +203,7 @@ public class TextInterface {
 				}
 			}
 		}
-			//ProductRepository.editItem(id,newDiscount,newTax,newSalePrice);
+			
 			
 		//dizer que o produto está na prateleira x
 		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  )
@@ -257,7 +264,7 @@ public class TextInterface {
 						
 		menu_principal();
 		
-		//falta dizer que a prateleira tem x produtos
+		//falta dizer que a prateleira tem x produtos....
 		}
 	
 	
@@ -277,13 +284,13 @@ public class TextInterface {
 				Float newCapacity = Utils.validatefloat(s, false);
 				System.out.println("Para mudar o valor do preco insire um novo valor: ");
 				Float newPrice = Utils.validatefloat(s, false);
+				
+				//ShelfRepository.editItem(id,newLocation,newCapacity,newPrice);
+				
 				System.out.println("O produto modificado apresenta os seguintes valores: " + " ID:" + id + " Location: " + newLocation + " Capacity: " + newCapacity + "Price: " + newPrice);
 			}else{
 				System.out.println("Este Id nao existe na lista de prateleiras");
-		}
-		
-			//ShelfRepository.editItem(id,newLocation,newCapacity,newPrice);
-								
+		}							
 		menu_principal();		
 		}
 	}
