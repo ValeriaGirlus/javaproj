@@ -136,22 +136,18 @@ public class TextInterface {
 	//------------------------------------------------menu produtos-----------------------------------------------------------
 	//CRIAR PRODUTO
 	public static void createProduct(){
-<<<<<<< HEAD
-		Integer [] shelfArray = null;
-=======
+
 		
 		//criar um array da sehlf para guardar os ids dos produtos
 		ArrayList <Integer> shelfIdList = new ArrayList();
->>>>>>> 87fb440498ef88bf0602bfb24aef8fe7e916743d
+
 		
 		Scanner s = new Scanner(System.in);
 		//o utilizador nao precisa de escrever o id porque é gerado automaticamente
 		//o utilizador preenche os outros campos, sendo que é preciso validar o que escreve
 		System.out.println("Inserir Id do produto:");
-<<<<<<< HEAD
+
 		
-=======
->>>>>>> 87fb440498ef88bf0602bfb24aef8fe7e916743d
 		Integer id = ProductRepository.getNextId();
 		System.out.println("Inserir valor de desconto do produto:");
 		Float discount = Utils.validatefloat(s,false);
@@ -164,11 +160,11 @@ public class TextInterface {
 		
 		new Product(id,discount,tax,saleprice);
 		
-<<<<<<< HEAD
+
 		
 		//falta inserir o produto numa prateleira - pode estar en 0 ou n prateleiras				
 		
-=======
+
 		//falta inserir o produto numa prateleira - pode estar em 0 ou n prateleiras
 		//ver quais as prateleiras disponíveis
 		//perguntar ao utilizador em que prateleiras quer guardar o produto
@@ -177,7 +173,7 @@ public class TextInterface {
 		
 		shelfIdList.add(id);
 						
->>>>>>> 87fb440498ef88bf0602bfb24aef8fe7e916743d
+
 		//voltar para o menu principal
 		menu_principal();
 		
@@ -199,7 +195,7 @@ public class TextInterface {
 				//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  )
 				
 				System.out.println("Tem a certeza que pretende editar este produto? Se sim pressione s, se nao pressione n");
-<<<<<<< HEAD
+
 				while(true){
 					String character = s.nextLine();
 					if (character.equals("s")){
@@ -222,7 +218,7 @@ public class TextInterface {
 						}
 					}else if(character.equals("n")){
 						menu_product();
-=======
+
 				Scanner sc = new Scanner(System.in);
 				String letter = s.nextLine();
 				
@@ -254,7 +250,7 @@ public class TextInterface {
 							break;
 							}
 						}
->>>>>>> 87fb440498ef88bf0602bfb24aef8fe7e916743d
+
 				
 					//sair disto
 					
@@ -265,15 +261,12 @@ public class TextInterface {
 				System.out.println("Este Id nao existe na lista de produtos");
 			}
 		}
-<<<<<<< HEAD
+	}
 			
 			
 		//dizer que o produto está na prateleira x
 		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  )
-		
-=======
->>>>>>> 87fb440498ef88bf0602bfb24aef8fe7e916743d
-	}
+
 
 		
 					
@@ -283,10 +276,11 @@ public class TextInterface {
 		if(ProductList.isEmpty()){
 			System.out.println("Nao existe nenhum produto");		
 		}else{
-		System.out.println("Inserir Id do produto que quer consultar:");
-		Integer id = Utils.validateInt(s,false);
+			System.out.println("Inserir Id do produto que quer consultar:");
+			Integer id = Utils.validateInt(s,false);
 
 		//System.out.println("O produto com o Id especificado apresenta os seguintes valores: " + ProductList.get(id) + "e enconta-se na prateleira");
+		
 		menu_principal();	
 		}
 	}
@@ -346,7 +340,7 @@ public class TextInterface {
 			Integer id = Utils.validateInt(s,false);
 		
 			if (ShelfList.containsKey(id)){
-<<<<<<< HEAD
+
 				System.out.println("A prateleira contém a seguinte informacao:" + ShelfList.get(id));
 				System.out.println("Para mudar o valor da localizacao insire um novo valor: ");
 				Float newLocation = Utils.validatefloat(s, false);
@@ -363,7 +357,7 @@ public class TextInterface {
 		}							
 		menu_principal();		
 		}
-=======
+
 				System.out.println(""
 						+ "A prateleira contém a seguinte informacao:" + ShelfList.get(id));
 				System.out.println("Tem a certeza que pretende editar esta prateleira? Se sim pressione s, se nao pressione n");
@@ -395,7 +389,7 @@ public class TextInterface {
 				}
 			}
 		}	
->>>>>>> 87fb440498ef88bf0602bfb24aef8fe7e916743d
+
 	}
 }
 	
