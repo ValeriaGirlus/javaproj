@@ -259,18 +259,14 @@ public class TextInterface {
 					}
 			}else{
 				System.out.println("Este Id nao existe na lista de produtos");
+				}
 			}
 		}
-	}
-			
-			
-		//dizer que o produto está na prateleira x
-		//System.out.println("O produto com o Id" + ProductRepository.getInstance().get(id) + "está guardado na prateleira" +  )
-
-
-		
-					
+	}			
+}				
 	//CONSULTAR PRODUTO - o utilizador primeiro introduz o id do produto que quer consultar e depois aparecem os campos associados a esse produto
+	
+	
 	public static void consultProduct(){
 		Scanner s = new Scanner(System.in);
 		if(ProductList.isEmpty()){
@@ -356,7 +352,7 @@ public class TextInterface {
 				System.out.println("Este Id nao existe na lista de prateleiras");
 		}							
 		menu_principal();		
-		}
+		
 
 				System.out.println(""
 						+ "A prateleira contém a seguinte informacao:" + ShelfList.get(id));
@@ -372,7 +368,7 @@ public class TextInterface {
 						Float newPrice = Utils.validatefloat(s, false);
 						System.out.println("A prateleira modificada apresenta os seguintes valores: " + " ID:" + id + " Location:" + newLocation + "Capacity :" + newCapacity + " Price:" + newPrice);
 						
-						ShelfRepository.editItem(id,newLocation,newCapacity,newPrice);
+					//	ShelfRepository.editItem(id,newLocation,newCapacity,newPrice);
 						
 						System.out.println("Para voltar ao menu principal pressione ");
 						String text = s.nextLine();
@@ -391,8 +387,8 @@ public class TextInterface {
 		}	
 
 	}
-}
-	
+
+
 	public static void consultShelf(){
 		Scanner s = new Scanner(System.in);
 		if(ShelfList.isEmpty()){
