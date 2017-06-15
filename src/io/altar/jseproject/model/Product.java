@@ -4,18 +4,18 @@ import io.altar.jseproject.Repository.ProductRepository;
  
 
 public class Product extends Entity {
-	//private Integer id;
+	private Integer id;
 	private float discount;
 	private float tax;
 	private float saleprice;
-	/*
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	*/
+	
 	public float getDiscount() {
 		return discount;
 	}
