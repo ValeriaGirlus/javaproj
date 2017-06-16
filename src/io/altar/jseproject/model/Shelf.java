@@ -35,7 +35,7 @@ public class Shelf extends Entity{
 	}
 	
 	public Shelf(int shelfId, int location, int capacity, float price) {
-		super();
+//		super();
 		this.shelfId = shelfId;
 		this.location = location;
 		this.capacity = capacity;

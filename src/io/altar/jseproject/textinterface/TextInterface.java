@@ -155,7 +155,7 @@ public class TextInterface {
 		System.out.println("Inserir PVP do produto:");
 		Float saleprice = Utils.validatefloat(s, false);
 		//os campos que foram preenchidos vão ser inseridos no produto e vai aparecer neste formato cada produto 
-		System.out.println("Product: " + " ID:" + id + " Discount:" + discount + " IVA:" + tax + " PVP:" + saleprice + "\n");	
+		System.out.println("Product: " + " ID: " + id + " Discount: " + discount + " IVA: " + tax + " PVP: " + saleprice + "\n");	
 		
 		new Product(id,discount,tax,saleprice);
 		
@@ -165,8 +165,9 @@ public class TextInterface {
 		}else{
 			System.out.println("Em que prateleira pretende guardar o produto criado?\n");
 			Scanner sc = new Scanner(System.in);
-			//Integer shelfId = Utils.validateInt(s,false);
-			shelfIdList.add(id);
+//			Integer shelfId =
+
+//			shelfIdList.add(id);
 			sc.close();
 		}
 		TextInterface.menu_principal();

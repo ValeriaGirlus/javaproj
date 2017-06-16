@@ -10,7 +10,7 @@ public abstract class EntityRepository<E extends Entity>{
 
 	// ArrayList<Product> Products = new ArrayList<Product>();
 	
-	private static LinkedHashMap<Integer, Entity> entityList = new LinkedHashMap<>();
+	private LinkedHashMap<Integer, Entity> entityList = new LinkedHashMap<>();
 	//o linkhashmap mant�m a ordem de inser��o dos elementos na lista de produtos ou prateleira
 	//por cada produto ou prateleira criada, o id � incrementado por 1 em rela��o ao 0
 		private static Integer id = 0;
