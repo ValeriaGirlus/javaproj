@@ -61,7 +61,7 @@ public class TextInterface {
 		case 1:
 			createProduct();
 			break;
-		case 2: 
+		case 2:                                                                                                                                                                   
 			editProduct();
 			break;
 		case 3:
